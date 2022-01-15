@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/estilo.css">
+    <link rel="icon" href="img/icons/Kyoco-title.png" type="image/png">
+    <title>Kyoco</title>
+</head>
+<body>
+<header class="">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <div class="container-fluid">
+                <a  class=" d-flex justify-content-center logo-head" href="index.html"><span class="visually-hidden">Kyoco</span></a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class=" collapse navbar-collapse" id="navbarNavAltMarkup">
+                    <div class="navbar-nav">
+                        <a id="homeVer" class="nav-link active text-light h5" aria-current="page" href="#">Home</a>
+                        <a  id="productoVer" class="nav-link text-light h5" href="#">Productos</a>
+                        <!-- <button id="productoVer" class="nav-link text-light h5" >productos</button> -->
+                        <a id="contactoVer" class="nav-link text-light h5" href="#">Contacto</a>
+                    </div>
+                    <div id="minicarrito" class=" d-flex justify-content-end" >
+                            <div>
+                                <span class="unidad">0</span>
+                                <span class="precio">$0</span>
+                                <button id="carrito" class="btn btn-link " type="submit"><span class="visually-hidden">Carrito</span></button>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+</header>
+
+<main>    
+    <picture>
+        <source media="(max-width: 800px)" srcset="img/Banner_productos_mobile2.jpg" >
+        <source media="(max-width: 1000px)" srcset="img/Banner_productos_mobile.jpg" >
+        <img src="img/Banner_productos.jpg" alt="Vela sobre una mesa">
+    </picture>
+    <div id="home">
+        <div class="row justify-content-center mt-5 px-3 ">
+            <div class="col-sm-11 col-lg-9 pb-3">
+                <h1 class="mb-4">Sobre Kyoco</h1>
+                <p>Impulsados por una profunda apreciación del diseño, las tendencias y la estética visual de cada elemento que nos acompaña a diario, creamos Kyoco en el 2015.
+                Nuestras colecciones ofrecen aromas icónicos para que puedas llevar una energía positiva a todos tus ambientes, creemos que prender una vela convierte un momento en una experiencia mágica. Nuestra misión es clara: queremos que el aroma y la estética de nuestras velas te cautive y te acompañe en los momentos cotidianos de la vida generando una experiencia elevada.</p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center bg-ff mt-4 px-3 py-3">
+                <picture class="col-sm-11 col-md-5 col-lg-4 text-center my-auto">
+                    <img src="img/producto/Hologram.jpg" alt="vela en un vaso de vidrio">
+                </picture>
+                <div  class="col-sm-11 col-md-6 col-lg-5 py-2 my-auto">
+                    <h2>Nuestros Productos</h2>
+                <p>Nuestras velas son cera de soja natural y de producción local. Ademas utilizamos un aditivo de origen vegetal para ofrecer un producto estable y con un quemado perfecto. Todos los pabilos son de algodón. Las esencias que elegimos son un mix entre naturales y sintéticas, de esta manera nos aseguramos de que la difusión del aroma sea exitosa y también mas sustentable .<br>
+
+                Creemos que la transparencia es la clave en la comunicación sobre la composición de nuestros productos. Por supuesto, todas nuestras velas son cruelty free, veganas & libres de sulfatos. Si tenes alguna pregunta, no dudes en escribirnos desde CONTACTO y nuestro equipo estará resolviendo tus inquietudes lo antes posible.</p>
+                </div>
+        </div>
+        <div class="row justify-content-center mt-4 px-3 py-3">
+            <div  class="col-sm-11 col-md-6 col-lg-5 my-auto">
+                <h2>REUTILIZÁ</h2>
+                <p>Todos nuestros envases son reutilizabas. Acá te dejamos algunas ideas para que reutilices cada uno de ellos.</p>
+                <h3 class="text-secondary font-weight-bold">Tips para una limpieza perfecta:</h3>
+                <ul class="ml-4">
+                    <li>Lo ideal es calentar el envase unos segundos en el horno o microondas para poder remover la cera con facilidad.</li>
+                    <li>Luego desechen la cera sobrante</li>
+                    <li>Con un cuchillo remové la base del pabilo</li>
+                    <li>Ahora lava con agua y jabón tu envase</li>
+                </ul>
+            
+        </div>
+            <div class="col-sm-11 col-md-5 col-lg-4 text-center my-auto">
+                <img src="img/producto/NightSmoke.jpg" alt="">
+            </div>
+        </div>
+    </div>
+    
+    <div id="contacto">
+        <h1>Contacto</h1>
+        <div class="container contacto">
+        <p class="h4 mb-3">Si queres realizar un pedido por mayor o tener mas novedades de nuestros productos, no dudes en escribirnos.</p>
+          <form>
+              <div class="form-group mb-3">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="mb-3 form-control" id="nombre" placeholder="Nombre...">
+              </div>
+              <div class="form-group mb-3">
+                <label for="mail" class="form-label">Email</label>
+                <input type="email" class="mb-3 form-control" id="mail"  placeholder="email...">
+              </div>
+              <div class="form-group">
+                <label for="comentario" class="form-label">Dejanos tu Consulta</label>
+                <textarea id="comentario" class="mb-3 form-control" cols="30" rows="5"></textarea>
+              </div>
+              <input type="submit" value="Enviar" class="btn btn-success btn-lg">
+          </form>
+        </div>
+    </div>
+    <div id="section-1" class="pt-4">
+        <h1 class="pt-4">Velas</h1>
+        <section id="cards" class="pt-4"></section>
+    </div>
+
+    <section id="section-2">
+        <div class="container">
+            <h1 class="h1 mt-4">Carrito de Compras</h1>
+            <table class="table text-center">
+                <thead class="bg-dark text-light">
+                    <tr>
+                        <th>ID</th>
+                        <th>Imagen</th>
+                        <th>Nombre</th>
+                        <th>Descripcion</th>
+                        <th>Cantidad</th>
+                        <th>Btn</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody id="items">
+                    
+                </tbody>
+                <tfoot class="borde-BF">
+                    <tr id="footer">
+                        <th>Carrito Vacio</th>
+                    </tr>
+                </tfoot>
+            </table>
+            <button id="productoComprar" class="btn btn-success">Aceptar</button>
+        </div> 
+    </section>
+
+    <section id="section-3">
+        <div class="container contacto">
+            <form>
+                <div class="form-group mb-3">
+                    <label for="mail" class="form-label">Email</label>
+                    <input type="email" class="mb-3 form-control" id="mail"  placeholder="email...">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="nombre" class="form-label">Nombre Completo</label>
+                    <input type="text" class="mb-3 form-control" id="nombre" placeholder="Ingrese el Nombre como figura en la tarjeta.">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="dni" class="form-label">DNI</label>
+                    <input type="text" class="mb-3 form-control" id="dni" placeholder="Ingrese el DNI.">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="numerotarjeta" class="form-label">Numero de la Tarjeta</label>
+                    <input type="text" class="mb-3 form-control" id="numerotarjeta" placeholder="Ingrese el Numero como figura en la tarjeta.">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="codigo" class="form-label">Codigo de Seguridad</label>
+                    <input type="text" class="mb-3 form-control" id="codigo" placeholder="Ingrese el Codigo de Seguridad del reverso de la tarjeta.">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="fecha" class="form-label">Fecha de Vencimiento</label>
+                    <input type="text" class="mb-3 form-control" id="fecha" placeholder="Ingrese la fecha de Vencimiento de la tarjeta.">
+                </div>
+                <div class="form-group mb-3">
+                    <label for="direccion" class="form-label">Direccion</label>
+                    <input type="text" class="mb-3 form-control" id="direccion"  placeholder="direccion...">
+                </div>
+                <div class=" d-flex justify-content-end">
+                    <div id="compra" >
+                        <p class="h4 text-secondary">Envio: $600</p>
+                        <p class="h4 text-secondary">Subtotal: $600</p>
+                        <p class="h2" >Total: 1200</p>
+                    </div>
+                </div>
+                <div class="pt-3" style="text-align: right;">
+                    <button id="graciasCompra" class="btn btn-success btn-lg">Comprar</button>
+                </div>
+                
+            </form>
+        </div>
+    </section>
+    
+    <section id="section-4">
+        <h1>Gracias por tu Compra!</h1>
+    </section>
+
+    <section id="section-5">
+        <div id="ampliar"></div>
+    </section>
+</main>
+
+<footer class="pb-1 pt-1">
+    <div class=" container pl-4">
+        <div class="foot mt-4" >
+            <a  class="logo-footer " href="#"><span class="visually-hidden">Kyoco</span></a>  
+        </div>
+        
+        <div class="mt-4 row">
+            <div class="col-sm-6 col-md-5">
+                <ul class="redes  mb-4">    
+                    <li><a href="#" class="face"><span class="visually-hidden">Facebook</span></a></li>
+                    <li><a href="#" class="insta"><span class="visually-hidden">Instagram</span></a></li>
+                    <li><a href="#" class="youtube"><span class="visually-hidden">Youtube</span></a></li>
+                </ul>
+            </div>
+                
+            <div class="col-sm-6 col-md-7 m-auto">
+                <ul class="info">
+                    <li><a href="" class="gmail"></a>info@kyoco.com</li>
+                    <li class="mt-4"><a href="#" class="mapa"></a>Buenos Aires, Argentina</li>
+                </ul>
+            </div>
+        </div>
+        <p class="text-light mt-2">Copyright©Franco Kurachi Ubé</p>
+    </div>
+</footer>
+    <script src="css/bootstrap/js/bootstrap.bundle.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>

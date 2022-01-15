@@ -1,0 +1,408 @@
+*{  margin: 0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.borde {    border: solid black 1px;
+}
+
+.bg-ff {    background: #cc9966;
+}
+
+.bg-BF {    background: #BF7128;
+}
+
+img {   max-width: 100%;
+}
+
+a {
+    text-decoration: none;
+}
+
+.info {
+    list-style:none;
+}
+
+/*
+---------------------------------------------------------------------------------------------------------------------
+    -    -    -    -    -    -    -    -    -    -header-    -    -    -    -    -    -    -    -    -    -    -
+---------------------------------------------------------------------------------------------------------------------
+*/
+.logo-head {   background:url(../img/icons/logo-head.png) no-repeat center center;
+    height:55px ;
+    width: 200px;
+    margin-bottom: 0;
+}
+
+header {    background: #BF7128;
+}
+
+h1 {    font-size: 4em;
+        width: 100%;
+        color: black;
+        text-align: center;
+}
+/*
+---------------------------------------------------------------------------------------------------------------------
+    -    -    -    -    -    -    -    -    -    -MiniCarrito-    -    -    -    -    -    -    -    -    -    -    -
+---------------------------------------------------------------------------------------------------------------------
+*/
+
+#minicarrito {
+    width: 98%;
+    border-radius: 10px;
+}
+
+#minicarrito div {
+    background-color: #996633;
+    border-radius: 10px;
+    max-width: 220px;
+    display: flex;
+    align-items: center;
+    padding: .6em;
+}
+
+.unidad {
+    /* background-color: black; */
+    background: #BF7128;
+    color: white;
+    width: 40px;
+    height: 40px;
+    padding: 5px;
+    border-radius:20px;
+    text-align: center;
+    display: inline-block;
+}
+.precio {
+    background: #BF7128;
+    color: white;
+    height: 40px;
+    /* width: 80px; */
+    text-align: center;
+    padding: .5em;
+    border-radius:10px;
+    margin-right: .8em;
+    margin-left: .8em;
+}
+#carrito {
+    background-image: url("../img/icons/Carrito.png");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-color: #BF7128;
+    border-radius: 10px;
+    width: 50px;
+    height: 40px;
+}
+
+/* ---------------------------------------------------------------------------------------------------------------------
+    -    -    -    -    -    -    -    -    -    -Productos-    -    -    -    -    -    -    -    -    -    -    -
+---------------------------------------------------------------------------------------------------------------------
+*/
+
+ #productos {   display: none;
+ }
+
+.resumen {      text-align: right;
+                margin-top: -1em;
+                padding-top: .5em;
+                padding-bottom: 1em;
+                padding-right: 1em;
+}
+
+.resumen div p {    font-size: 1.5em;
+}
+
+#cards/* section */ {   display: flex;
+            flex-direction: row;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 1100px;
+            margin: auto;
+}
+
+.cards img {    border-top-left-radius: 20px;
+                border-top-right-radius: 20px;
+}
+
+.cards {    border-radius: 20px;
+            /* box-shadow: 3px 3px 10px black, -3px -3px 10px black; */
+            margin: 1em;
+            padding-bottom: 1.5em;
+            text-align: center;
+            /* align-cards: center; */
+            display: flex;
+            width: 320px;
+            flex-wrap: wrap;
+}
+.cards-img {    width: 320px;
+                order:1;
+}
+.cards-detalle {    width: 320px;
+                    order: 2;
+}
+
+.cards-detalle h2 { margin-top: .5em;
+
+}
+/* .cards-detalle a  {
+                margin-left: .5em;
+} */
+/* .dere {
+    margin-left: .5em;
+} */
+button:last-child {
+    margin-left: .5em;
+}
+.cards p {  text-align: right;
+            margin-right: 10%;
+            font-size: 1.2em;
+}
+
+.cards p span {     font-weight: bold;
+}
+
+/* .butt {     
+            width: 150px;
+            height: 3em;
+            border-radius: 10px;
+            vertical-align: top;
+} */
+
+/* .agregar:hover {    background-color: #cccccc;
+}
+
+.ampliar {      background-color: black;
+                color: white;
+}
+.ampliar2 {     padding-top: .7em; 
+}
+
+.ampliar:hover {    background-color: #333333;
+                    color: white;
+} */
+
+/*
+---------------------------------------------------------------------------------------------------------------------
+    -    -    -    -    -    -    -    -    -    -Ampliar-Producto-    -    -    -    -    -    -    -    -    -    
+---------------------------------------------------------------------------------------------------------------------
+*/
+/* .card_detalle {
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px black, -3px -3px 10px black;
+    margin: auto;
+    margin-top: 3em;
+} */
+.card_ampliado {
+    border-radius: 20px;
+    box-shadow: 3px 3px 10px black, -3px -3px 10px black;
+    margin: auto;
+    margin-top: 3em;
+}
+
+/*
+---------------------------------------------------------------------------------------------------------------------
+    -    -    -    -    -    -    -    -    -    -VentanaModal-    -    -    -    -    -    -    -    -    -    -    -
+---------------------------------------------------------------------------------------------------------------------
+*/
+
+/*
+Esto se utiliza en js para hacer con el boton-ampliar la amplicacion del producto
+*/
+
+.modal-agregar {    position: fixed; z-index: 1;
+                    display: flex; flex-direction: column;
+                    justify-content: center; align-cards: center;
+                    top: 0;
+                    left: 0;
+                    bottom: 0;
+                    right: 0;
+                    background-color: rgba(0,0,0,.9);
+}
+
+.modal-agregar > a {    position: fixed;
+                        z-index: 1;
+                        display: flex;
+                        flex-direction: column;
+                        justify-content: center;
+                        align-cards: center;
+                        top: 1em;
+                        right: 1em;
+                        border: white 1px solid;
+                        border-radius: 5px;
+                        color: white !important;
+                        width: 2.5em;
+                        height: 2em;
+                        text-decoration: none;
+                        cursor: pointer;
+}
+
+.modal-agregar > a:hover {  background-color: red;    
+                            color: white;
+}
+
+.cont-modal {   width: 320px;
+                padding-bottom: 1em;
+                border: white solid 1px;
+                border-radius: 20px;
+                text-align: center;
+}
+
+.cont-modal > img {     border-top-left-radius: 20px;
+                        border-top-right-radius: 20px;
+}
+
+.cont-modal > h3 {  color: white;
+                    font-size: 2em;
+}
+
+.cont-modal > p {   color: white;
+                    font-size: 1.2em; 
+                    margin-left: 1em;
+}
+
+.cont-modal > .precio { text-align: right;
+                        font-size: 1.5em;
+                        margin-right: .5em;
+}
+
+.cont-modal > .butt {   margin: auto;
+                        align-cards: center;
+                        justify-content: center;
+}
+
+/*
+---------------------------------------------------------------------------------------------------------------------
+    -    -    -    -    -    -    -    -    -    -Contacto-    -    -    -    -    -    -    -    -    -    -    -
+---------------------------------------------------------------------------------------------------------------------
+*/
+.contacto {     border: solid gray 1px;
+                border-radius: 5px;
+                padding: 1em;
+}
+/*
+---------------------------------------------------------------------------------------------------------------------
+    -    -    -    -    -    -    -    -    -    -Adm-Productos-    -    -    -    -    -    -    -    -    -    -    -
+---------------------------------------------------------------------------------------------------------------------
+*/
+.table-img{     width: 70px;
+                height: 70px;
+}
+/*
+---------------------------------------------------------------------------------------------------------------------
+    -    -    -    -    -    -    -    -    -    -Footer-    -    -    -    -    -    -    -    -    -    -    -
+---------------------------------------------------------------------------------------------------------------------
+*/
+footer {    margin-top: 2em;
+            background-color: #3F2713;
+}
+
+.foot {     border-radius: 15px;
+            box-shadow: 0px 5px 20px black;
+            width: 250px;
+            background-color: white;
+}
+
+.logo-footer {  background:url(../img/icons/logo-foot.png) no-repeat center center;
+                width: 250px;
+                height: 70px;
+                display: flex;
+                
+}
+
+.redes li {     margin-right: .2em; 
+    display: inline-block;  
+}
+
+.face {     background: url(../img/icons/facebook_pc.png) center center no-repeat ;
+}
+
+.insta {    background: url(../img/icons/instagram_pc.png) center center no-repeat ;
+}
+
+.youtube {    background: url(../img/icons/youtube_pc.png) center center no-repeat ;
+}
+
+.info li {
+    color: white;
+}
+
+.info li a  {   color: white;
+                font-weight: 300;
+                font-size: 1.1em;
+                display: inline-block;
+                vertical-align: middle;
+                color: white;
+}
+
+.mapa {     background: url(../img/icons/mapa_pc.png) 0 center no-repeat;
+            background-color: white;
+}
+
+.gmail{     background: url(../img/icons/mail_pc.png) 0 center no-repeat;
+            width:40px ;
+            height:35px ;
+            margin-right: 1em;
+            display: flex;
+}
+
+.face, .insta, .youtube, .mapa {     width: 40px;
+                                    height: 40px;
+                                    display: flex;
+                                    box-shadow: 10px 5px 15px black;
+                                    margin-right: 1em;
+                                    border-radius: 5px;
+}
+
+footer div p {      text-align: center; 
+}
+
+@media screen and (max-width: 768px) {
+
+/*
+---------------------------------------------------------------------------------------------------------------------
+    -    -    -    -    -    -    -    -    -    -Detalle de Producto-    -    -    -    -    -    -    -    -    -  
+---------------------------------------------------------------------------------------------------------------------
+*/
+    .card_ampliado {
+                    max-width: 500px;
+                    border-top-left-radius:20px ;
+                    border-top-right-radius:20px ;
+    }
+    .card_ampliado img {
+        border-top-left-radius:20px ;
+        border-top-right-radius:20px ;
+    }
+
+}
+@media screen and (min-width: 769px) {
+
+/*
+---------------------------------------------------------------------------------------------------------------------
+    -    -    -    -    -    -    -    -    -    -Header-    -    -    -    -    -    -    -    -    -    -    -
+---------------------------------------------------------------------------------------------------------------------
+*/
+    #navbarNavAltMarkup {
+        margin-left: 2em;
+    }
+/*
+---------------------------------------------------------------------------------------------------------------------
+    -    -    -    -    -    -    -    -    -    -Detalle de Producto-    -    -    -    -    -    -    -    -    - 
+---------------------------------------------------------------------------------------------------------------------
+*/
+    .card_ampliado {
+        display: flex;
+        max-width: 760px;
+    }
+
+    .card_ampliado img {
+        max-width: 400px; /* achica las imagenes a 400px */
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+
+    .detalle {
+        width: 400px;
+
+    }
+}
