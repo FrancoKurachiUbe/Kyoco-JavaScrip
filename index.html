@@ -10,7 +10,7 @@
     <title>Kyoco</title>
 </head>
 <body>
-<header class="">
+<header>
         <nav class="navbar navbar-expand-lg navbar-light">
             <div class="container-fluid">
                 <a  class=" d-flex justify-content-center logo-head" href="index.html"><span class="visually-hidden">Kyoco</span></a>
@@ -21,15 +21,14 @@
                     <div class="navbar-nav">
                         <a id="homeVer" class="nav-link active text-light h5" aria-current="page" href="#">Home</a>
                         <a  id="productoVer" class="nav-link text-light h5" href="#">Productos</a>
-                        <!-- <button id="productoVer" class="nav-link text-light h5" >productos</button> -->
                         <a id="contactoVer" class="nav-link text-light h5" href="#">Contacto</a>
                     </div>
                     <div id="minicarrito" class="d-flex justify-content-end" >
-                            <div>
-                                <span class="unidad">0</span>
-                                <span class="precio">$0</span>
-                                <button id="carrito" class="btn btn-link " type="submit"><span class="visually-hidden">Carrito</span></button>
-                            </div>
+                        <div>
+                            <span class="unidad">0</span>
+                            <span class="precio">$0</span>
+                            <button id="carrito" class="btn btn-link " type="submit"><span class="visually-hidden">Carrito</span></button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -73,18 +72,17 @@
                     <li>Con un cuchillo remové la base del pabilo</li>
                     <li>Ahora lava con agua y jabón tu envase</li>
                 </ul>
-            
-        </div>
+            </div>
             <div class="col-sm-11 col-md-5 col-lg-4 text-center my-auto">
                 <img src="img/producto/NightSmoke.jpg" alt="">
             </div>
         </div>
     </div>
     
-    <div id="contacto">
-        <h1>Contacto</h1>
+    <div id="contacto" class="pt-4">
+        <h1 class="pt-4 pb-4">Contacto</h1>
         <div class="container contacto">
-        <p class="h4 mb-3">Si queres realizar un pedido por mayor o tener mas novedades de nuestros productos, no dudes en escribirnos.</p>
+        <p class="h3 mb-3">Si queres realizar un pedido por mayor o tener mas novedades de nuestros productos, no dudes en escribirnos.</p>
           <form>
               <div class="form-group mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
@@ -102,12 +100,12 @@
           </form>
         </div>
     </div>
-    <div id="section-1" class="pt-4">
+    <div id="sectionProductos" class="pt-4">
         <h1 class="pt-4">Velas</h1>
         <section id="cards" class="pt-4"></section>
     </div>
 
-    <section id="section-2">
+    <section id="sectionCarrito">
         <div class="container">
             <h1 class="h1 mt-4">Carrito de Compras</h1>
             <table class="table text-center">
@@ -135,7 +133,7 @@
         </div> 
     </section>
 
-    <section id="section-3">
+    <section id="sectionCheckout">
         <div class="container contacto">
             <form>
                 <div class="form-group mb-3">
@@ -176,16 +174,15 @@
                 <div class="pt-3" style="text-align: right;">
                     <button id="graciasCompra" class="btn btn-success btn-lg">Comprar</button>
                 </div>
-                
             </form>
         </div>
     </section>
     
-    <section id="section-4">
+    <section id="sectionGracias">
         <h1>Gracias por tu Compra!</h1>
     </section>
 
-    <section id="section-5">
+    <section id="sectionAmpliar">
         <div id="ampliar"></div>
     </section>
 </main>

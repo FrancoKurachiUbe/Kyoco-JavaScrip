@@ -17,24 +17,26 @@ const btnContacto = d.getElementById('contactoVer')
 const btnComprar = d.getElementById('productoComprar')
 const btnGracias = d.getElementById('graciasCompra')
 
+/* secciones del html */
 const home = d.getElementById('home')
 const contacto = d.getElementById('contacto')
-const section1 = d.getElementById('section-1')
-const section2 = d.getElementById('section-2')
-const section3 = d.getElementById('section-3')
-const section4 = d.getElementById('section-4')
-const section5 = d.getElementById('section-5')
+const sectionProductos = d.getElementById('sectionProductos')
+const sectionCarrito = d.getElementById('sectionCarrito')
+const sectionCheckout = d.getElementById('sectionCheckout')
+const sectionGracias = d.getElementById('sectionGracias')
+const sectionAmpliar = d.getElementById('sectionAmpliar')
 
-section1.style.display = "none";
-section2.style.display = "none";
-section3.style.display = "none";
-section4.style.display = "none";
-section5.style.display = "none";
+sectionProductos.style.display = "none";
+sectionCarrito.style.display = "none";
+sectionCheckout.style.display = "none";
+sectionGracias.style.display = "none";
+sectionAmpliar.style.display = "none";
 //home.style.display = "none";
 contacto.style.display = "none";
 
+/* Footer del Carrito */
 const footer = d.getElementById('footer')
-const fragment = d.createDocumentFragment()
+/*???*/ const fragment = d.createDocumentFragment()
 let carrito = {}
 let aVelas = [
 	{
@@ -102,7 +104,7 @@ items.addEventListener('click', e => { btnAumentarDisminuir(e) })
 btnCarrito.addEventListener('click', e => { VerCarrito(e) })
 /* home.addEventListener('click', e => { VerHome(e) }) */
 
-
+/*Botones del Menu*/
 btnProductos.addEventListener('click', e => { VerProducto(e) })
 btnHome.addEventListener('click', e => { VerHome(e) })
 btnContacto.addEventListener('click', e => { VerContacto(e) })
@@ -186,8 +188,8 @@ const setAmpliar = objeto => {
 }
 const pintarAmpliar = id => {
     ampliar.innerHTML = ""
-    section5.style.display = "block";
-    section1.style.display = "none";
+    sectionAmpliar.style.display = "block";
+    sectionProductos.style.display = "none";
 
     let div = d.createElement('div')
     div.classList = "card_ampliado"
@@ -427,50 +429,50 @@ const pintarCompra = () => {
 //Botones para ver el carrito y los Productos
 const VerCarrito = e => {
     if(e.target.classList.contains('btn-link')) {
-            section2.style.display = "block";
+            sectionCarrito.style.display = "block";
             home.style.display = "none";
             contacto.style.display = "none";
-            section1.style.display = "none";
-            section3.style.display = "none";
-            section4.style.display = "none";
-            section5.style.display = "none";
+            sectionProductos.style.display = "none";
+            sectionCheckout.style.display = "none";
+            sectionGracias.style.display = "none";
+            sectionAmpliar.style.display = "none";
     }
 }
 const VerProducto = e => {
     if(e.target.classList.contains('nav-link')) {
-            section1.style.display = "block";
+            sectionProductos.style.display = "block";
 
             home.style.display = "none";
             contacto.style.display = "none";
-            section2.style.display = "none";
-            section3.style.display = "none";
-            section4.style.display = "none";
-            section5.style.display = "none";
+            sectionCarrito.style.display = "none";
+            sectionCheckout.style.display = "none";
+            sectionGracias.style.display = "none";
+            sectionAmpliar.style.display = "none";
     }
 }
 const VerComprar = e => {
     if(e.target.classList.contains('btn-success')) {
-            section3.style.display = "block";
+            sectionCheckout.style.display = "block";
 
             home.style.display = "none";
             contacto.style.display = "none";
-            section1.style.display = "none";
-            section2.style.display = "none";
-            section4.style.display = "none";
-            section5.style.display = "none";
+            sectionProductos.style.display = "none";
+            sectionCarrito.style.display = "none";
+            sectionGracias.style.display = "none";
+            sectionAmpliar.style.display = "none";
     }
 }
 const VerGracias = e => {
     if(e.target.classList.contains('btn')) {
 
-        section4.style.display = "block";
+        sectionGracias.style.display = "block";
 
         home.style.display = "none";
         contacto.style.display = "none";
-        section1.style.display = "none";
-        section2.style.display = "none";
-        section3.style.display = "none";
-        section5.style.display = "none";
+        sectionProductos.style.display = "none";
+        sectionCarrito.style.display = "none";
+        sectionCheckout.style.display = "none";
+        sectionAmpliar.style.display = "none";
 
     }
 }
@@ -479,11 +481,11 @@ const VerHome = e => {
         home.style.display = "block";
         
         contacto.style.display = "none";
-        section1.style.display = "none";
-        section2.style.display = "none";
-        section3.style.display = "none";
-        section4.style.display = "none";
-        section5.style.display = "none";
+        sectionProductos.style.display = "none";
+        sectionCarrito.style.display = "none";
+        sectionCheckout.style.display = "none";
+        sectionGracias.style.display = "none";
+        sectionAmpliar.style.display = "none";
         
     }
 }
@@ -493,11 +495,11 @@ const VerContacto = e => {
         contacto.style.display = "block";
         
         home.style.display = "none";
-        section1.style.display = "none";
-        section2.style.display = "none";
-        section3.style.display = "none";
-        section4.style.display = "none";
-        section5.style.display = "none";
+        sectionProductos.style.display = "none";
+        sectionCarrito.style.display = "none";
+        sectionCheckout.style.display = "none";
+        sectionGracias.style.display = "none";
+        sectionAmpliar.style.display = "none";
         
     }
 }
