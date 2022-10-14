@@ -1,21 +1,13 @@
-/* 
----
-Agregar Contacto y la Home
-Agregar Alt en las imagenes
----
-*/
+
 const d = document
 const cards = d.getElementById('cards')
 const items = d.getElementById('items')
 const ampliar = d.getElementById('ampliar')
 
-const btnCarrito = d.getElementById('carrito')
-const btnProductos = d.getElementById('productoVer')
 const btnHome = d.getElementById('homeVer')
+const btnProductos = d.getElementById('productoVer')
 const btnContacto = d.getElementById('contactoVer')
-
-const btnComprar = d.getElementById('productoComprar')
-const btnGracias = d.getElementById('graciasCompra')
+const btnCarrito = d.getElementById('carrito')
 
 /* secciones del html */
 const home = d.getElementById('home')
@@ -31,11 +23,14 @@ sectionCarrito.style.display = "none";
 sectionCheckout.style.display = "none";
 sectionGracias.style.display = "none";
 sectionAmpliar.style.display = "none";
-//home.style.display = "none";
 contacto.style.display = "none";
 
 /* Footer del Carrito */
 const footer = d.getElementById('footer')
+const aceptarCompra = d.getElementById('aceptarCompra')
+
+const btnGracias = d.getElementById('graciasCompra')//????
+
 /*???*/ const fragment = d.createDocumentFragment()
 let carrito = {}
 let aVelas = [
@@ -88,9 +83,9 @@ let aVelas = [
         "id":               5
     }
 ];
-//Eventos de los Botones
+
+/*-------Eventos de los Botones-------*/
 d.addEventListener('DOMContentLoaded', () => { fetchData()
-    //La llave del localStorage esta en la  line 139
 if(localStorage.getItem('carrito')){
     carrito= JSON.parse(localStorage.getItem('carrito'))
     pintarCarrito()
@@ -101,19 +96,16 @@ cards.addEventListener('click', e => { addCarrito(e) })
 cards.addEventListener('click', e => { addAmpliar(e) })
 ampliar.addEventListener('click', e => { addCarrito(e) })
 items.addEventListener('click', e => { btnAumentarDisminuir(e) })
-btnCarrito.addEventListener('click', e => { VerCarrito(e) })
-/* home.addEventListener('click', e => { VerHome(e) }) */
-
-/*Botones del Menu*/
-btnProductos.addEventListener('click', e => { VerProducto(e) })
-btnHome.addEventListener('click', e => { VerHome(e) })
-btnContacto.addEventListener('click', e => { VerContacto(e) })
-
-btnComprar.addEventListener('click', e => { VerComprar(e),carrito = {}
+/* btnCompra.addEventListener('click', e => { VerComprar(e),carrito = {}
 pintarCarrito()
-pintarCompra()})
+pintarCompra()}) */
 btnGracias.addEventListener('click', e => { VerGracias(e) })
 
+// Botones del Menu
+btnHome.addEventListener('click', e => { VerHome(e) })
+btnProductos.addEventListener('click', e => { VerProducto(e) })
+btnContacto.addEventListener('click', e => { VerContacto(e) })
+btnCarrito.addEventListener('click', e => { VerCarrito(e) })
 
 const fetchData = async () =>  {
     try {
@@ -123,7 +115,7 @@ const fetchData = async () =>  {
     }
 }
 
-//Crea Todos las cards de los productos productos 
+/*--------- Productos ---------*/
 const pintarCards = aVelas => {
     aVelas.forEach(producto => {
         //console.log(producto)
@@ -170,6 +162,8 @@ const pintarCards = aVelas => {
         div2.appendChild(img);
     })
 }
+
+/*--------- Ampliar ---------*/
 const addAmpliar = e => {
     if (e.target.classList.contains('btn-outline-dark')) {
         setAmpliar(e.target.parentElement)
@@ -177,7 +171,6 @@ const addAmpliar = e => {
     e.stopPropagation() 
 }
 
-//Cuanto se precione el boton toda la informacion que se encuentre dentro de la card quedara almacenda
 const setAmpliar = objeto => {
     const producto = {
         id: objeto.querySelector('button').dataset.id,
@@ -186,6 +179,7 @@ const setAmpliar = objeto => {
     pintarAmpliar(id)
 
 }
+// Ampliamos el producto seleccionado
 const pintarAmpliar = id => {
     ampliar.innerHTML = ""
     sectionAmpliar.style.display = "block";
@@ -232,7 +226,7 @@ const pintarAmpliar = id => {
     div3.appendChild(btnAgregar)
 }
 
-//Agregar Carrido
+/*--------- Carrito ---------*/
 const addCarrito = e => {
     if (e.target.classList.contains('btn-primary')) {
         console.log(e.target.parentElement)
@@ -241,7 +235,6 @@ const addCarrito = e => {
     e.stopPropagation() 
 }
 
-//Cuanto se precione el boton toda la informacion que se encuentre dentro de la card quedara almacenda
 const setCarrito = objeto => {
     const producto = {
         id: objeto.querySelector('button').dataset.id,
@@ -253,7 +246,7 @@ const setCarrito = objeto => {
     }
     carrito[producto.id] = {...producto}
     pintarCarrito()
-    pintarCompra() 
+    pintarCompra() //creo que no va
 }
 
 const pintarCarrito = () => {
@@ -312,64 +305,12 @@ const pintarCarrito = () => {
    pintarFooter()
    pintarMinicarrito()
    pintarCompra()
+   btnaceptar()
 
    localStorage.setItem('carrito', JSON.stringify(carrito))
    //console.log(carrito)
 }
 
-const pintarFooter = () => {
-    footer.innerHTML = ''
-    if(Object.keys(carrito).length === 0) {
-        footer.innerHTML = `<th>Carrito Vacio</th>`
-        return
-    }
-    
-    const nCantidad = Object.values(carrito).reduce((acc, {cantidad}) => acc + cantidad, 0)
-    const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad * precio, 0)
-
-    let tr = d.getElementById('footer')
-
-    let thProductos = d.createElement('th')
-    thProductos.innerHTML = 'Total Productos'
-    tr.appendChild(thProductos)
-
-    let td1 = d.createElement('td')
-    tr.appendChild(td1)
-    let td2 = d.createElement('td')
-    tr.appendChild(td2)
-    let td3 = d.createElement('td')
-    tr.appendChild(td3)
-
-    let tdCantidad = d.createElement('td')
-    tdCantidad.innerHTML = nCantidad
-    tr.appendChild(tdCantidad)
-
-    let tdVaciar = d.createElement('td')
-    tr.appendChild(tdVaciar)
-
-    let btnVaciar = d.createElement('button')
-    btnVaciar.innerHTML = 'Vaciar'
-    btnVaciar.className = 'btn btn-danger btn-sm'
-    tdVaciar.appendChild(btnVaciar)
-    btnVaciar.addEventListener('click', () => {
-        carrito = {}
-        pintarCarrito()
-        pintarCompra()
-    })
-
-    let tdTotal = d.createElement('td')
-    tdTotal.innerHTML = nPrecio
-    tr.appendChild(tdTotal)
-}
-
-const pintarMinicarrito = () => {
-    const nCantidad = Object.values(carrito).reduce((acc, {cantidad}) => acc + cantidad, 0)
-    const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad * precio, 0)
-
-    let minicarrito= d.getElementById('minicarrito')
-    minicarrito.querySelectorAll('span')[0].textContent = nCantidad
-    minicarrito.querySelectorAll('span')[1].textContent = "$" + nPrecio
-}
 
 const btnAumentarDisminuir = e => {
     //console.log(e.target)
@@ -394,6 +335,81 @@ const btnAumentarDisminuir = e => {
     }
     e.stopPropagation()
 }
+
+const btnaceptar = () => {
+    aceptarCompra.innerHTML = ''
+    if(Object.keys(carrito).length === 0) {
+        aceptarCompra.innerHTML= ``
+        return
+    }
+
+    let btnCompra = d.createElement('button')
+    btnCompra.innerHTML = 'Aceptar'
+    btnCompra.className =  'btn btn-success'
+    aceptarCompra.appendChild(btnCompra)
+    btnCompra.addEventListener('click', e => { VerComprar(e),carrito = {}
+    pintarCarrito()
+    pintarCompra()})
+}
+
+const pintarFooter = () => {
+    footer.innerHTML = ''
+    if(Object.keys(carrito).length === 0) {
+        footer.innerHTML = `<th>Carrito Vacio</th>`
+        return
+    }
+    
+    const nCantidad = Object.values(carrito).reduce((acc, {cantidad}) => acc + cantidad, 0)
+    const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad * precio, 0)
+
+    let thProductos = d.createElement('th')
+    thProductos.innerHTML = 'Total Productos'
+    footer.appendChild(thProductos)
+
+    let td1 = d.createElement('td')
+    footer.appendChild(td1)
+    let td2 = d.createElement('td')
+    footer.appendChild(td2)
+    let td3 = d.createElement('td')
+    footer.appendChild(td3)
+
+    let tdCantidad = d.createElement('td')
+    tdCantidad.innerHTML = nCantidad
+    footer.appendChild(tdCantidad)
+
+    let tdVaciar = d.createElement('td')
+    footer.appendChild(tdVaciar)
+
+    let btnVaciar = d.createElement('button')
+    btnVaciar.innerHTML = 'Vaciar'
+    btnVaciar.className = 'btn btn-danger btn-sm'
+    tdVaciar.appendChild(btnVaciar)
+    btnVaciar.addEventListener('click', () => {
+        carrito = {}
+        pintarCarrito()
+        pintarCompra()// revisar y sacar
+    })
+
+    let tdTotal = d.createElement('td')
+    tdTotal.innerHTML = nPrecio
+    footer.appendChild(tdTotal)
+
+}
+
+
+
+
+/*--------- Mini Carrito ---------*/
+const pintarMinicarrito = () => {
+    const nCantidad = Object.values(carrito).reduce((acc, {cantidad}) => acc + cantidad, 0)
+    const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad * precio, 0)
+
+    let minicarrito= d.getElementById('minicarrito')
+    minicarrito.querySelectorAll('span')[0].textContent = nCantidad
+    minicarrito.querySelectorAll('span')[1].textContent = "$" + nPrecio
+}
+
+
 
 const pintarCompra = () => {
     compra.innerHTML = ''
@@ -426,7 +442,7 @@ const pintarCompra = () => {
 
 }
 
-//Botones para ver el carrito y los Productos
+// Botones para ver las secciones del HTMl.
 const VerCarrito = e => {
     if(e.target.classList.contains('btn-link')) {
             sectionCarrito.style.display = "block";
