@@ -12,6 +12,12 @@
 
 .bg-BF {    background: #BF7128;
 }
+.bg-gris {  background-color: #E6DFDC;
+}
+.checkout {
+    height: 500px;
+    overflow-y: scroll;
+}
 
 img {   max-width: 100%;
 }

@@ -3,6 +3,7 @@ const d = document
 const cards = d.getElementById('cards')
 const items = d.getElementById('items')
 const ampliar = d.getElementById('ampliar')
+const checkout = d.getElementById('checkout')
 
 const btnHome = d.getElementById('homeVer')
 const btnProductos = d.getElementById('productoVer')
@@ -18,12 +19,15 @@ const sectionCheckout = d.getElementById('sectionCheckout')
 const sectionGracias = d.getElementById('sectionGracias')
 const sectionAmpliar = d.getElementById('sectionAmpliar')
 
-sectionProductos.style.display = "none";
-sectionCarrito.style.display = "none";
-sectionCheckout.style.display = "none";
-sectionGracias.style.display = "none";
-sectionAmpliar.style.display = "none";
+sectionCheckout.style.display = "none"; // esto cambia a none
+home.style.display = "none"; //esto se borra
+
 contacto.style.display = "none";
+sectionProductos.style.display = "none";
+sectionAmpliar.style.display = "none";
+sectionCarrito.style.display = "block";
+
+sectionGracias.style.display = "none";
 
 /* Footer del Carrito */
 const footer = d.getElementById('footer')
@@ -92,15 +96,13 @@ if(localStorage.getItem('carrito')){
     } 
 })
 
+/* Interaciones de Botones */
 cards.addEventListener('click', e => { addCarrito(e) })
 cards.addEventListener('click', e => { addAmpliar(e) })
 ampliar.addEventListener('click', e => { addCarrito(e) })
 items.addEventListener('click', e => { btnAumentarDisminuir(e) })
-/* btnCompra.addEventListener('click', e => { VerComprar(e),carrito = {}
-pintarCarrito()
-pintarCompra()}) */
-btnGracias.addEventListener('click', e => { VerGracias(e) })
 
+//btnGracias.addEventListener('click', e => { VerGracias(e) })
 // Botones del Menu
 btnHome.addEventListener('click', e => { VerHome(e) })
 btnProductos.addEventListener('click', e => { VerProducto(e) })
@@ -246,7 +248,7 @@ const setCarrito = objeto => {
     }
     carrito[producto.id] = {...producto}
     pintarCarrito()
-    pintarCompra() //creo que no va
+    //Checkout() //creo que no va
 }
 
 const pintarCarrito = () => {
@@ -304,7 +306,7 @@ const pintarCarrito = () => {
    })
    pintarFooter()
    pintarMinicarrito()
-   pintarCompra()
+   //Checkout() //creo que no va tampoco
    btnaceptar()
 
    localStorage.setItem('carrito', JSON.stringify(carrito))
@@ -336,29 +338,12 @@ const btnAumentarDisminuir = e => {
     e.stopPropagation()
 }
 
-const btnaceptar = () => {
-    aceptarCompra.innerHTML = ''
-    if(Object.keys(carrito).length === 0) {
-        aceptarCompra.innerHTML= ``
-        return
-    }
-
-    let btnCompra = d.createElement('button')
-    btnCompra.innerHTML = 'Aceptar'
-    btnCompra.className =  'btn btn-success'
-    aceptarCompra.appendChild(btnCompra)
-    btnCompra.addEventListener('click', e => { VerComprar(e),carrito = {}
-    pintarCarrito()
-    pintarCompra()})
-}
-
 const pintarFooter = () => {
     footer.innerHTML = ''
     if(Object.keys(carrito).length === 0) {
         footer.innerHTML = `<th>Carrito Vacio</th>`
         return
     }
-    
     const nCantidad = Object.values(carrito).reduce((acc, {cantidad}) => acc + cantidad, 0)
     const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad * precio, 0)
 
@@ -387,17 +372,31 @@ const pintarFooter = () => {
     btnVaciar.addEventListener('click', () => {
         carrito = {}
         pintarCarrito()
-        pintarCompra()// revisar y sacar
+        //Checkout()// revisar y sacar
+        btnCompra()
     })
 
     let tdTotal = d.createElement('td')
     tdTotal.innerHTML = nPrecio
     footer.appendChild(tdTotal)
 
+
 }
+// Boton Aceptar del carrito de compras.
+const btnaceptar = () => {
+    aceptarCompra.innerHTML = ''
+    if(Object.keys(carrito).length === 0) {
+        aceptarCompra.innerHTML= ``
+        return
+    }
 
-
-
+    let btnCompra = d.createElement('button')
+    btnCompra.innerHTML = 'Aceptar'
+    btnCompra.className =  'btn btn-success'
+    aceptarCompra.appendChild(btnCompra)
+    btnCompra.addEventListener('click', e => { VerComprar(e)
+    Checkout()})
+}
 
 /*--------- Mini Carrito ---------*/
 const pintarMinicarrito = () => {
@@ -409,13 +408,75 @@ const pintarMinicarrito = () => {
     minicarrito.querySelectorAll('span')[1].textContent = "$" + nPrecio
 }
 
+const Checkout = () => {
+    checkout.innerHTML= ''
+
+    let divDatos = d.createElement('div')
+    divDatos.classList = 'col-6 mx-auto pt-2 border'
+    checkout.appendChild(divDatos)
+
+        let span = d.createElement('span')
+        span.classList = 'text-secondary d-flex flex-row-reverse'
+        span.innerHTML = '1 de 2'
+        divDatos.appendChild(span)
 
 
-const pintarCompra = () => {
-    compra.innerHTML = ''
+    // Confirmar Datos y aceptar compra.
+    let divConfir = d.createElement('div')
+    divConfir.classList = 'col-5 bg-gris p-3 checkout'
+    checkout.appendChild(divConfir)
+
+        let h2 = d.createElement('h2')
+        h2.innerHTML = 'Productos:'
+        h2.classList = 'h5'
+        divConfir.appendChild(h2)
+
+        let table = d.createElement('table')
+        table.classList = 'table text-center'
+        divConfir.appendChild(table)
+
+            let thead = d.createElement('thead')
+            table.appendChild(thead)
+
+                let tr = d.createElement('tr')
+                thead.appendChild(tr)
+
+                    let thI = d.createElement('th')
+                    thI.innerHTML = 'Imagen' 
+                    tr.appendChild(thI)
+
+                    let thN = d.createElement('th')
+                    thN.innerHTML = 'Nombre'
+                    tr.appendChild(thN)
+
+                    let thC = d.createElement('th')
+                    thC.innerHTML = 'Cantidad'
+                    tr.appendChild(thC)
+
+                    let thT = d.createElement('th')
+                    thT.innerHTML = 'Total'
+                    tr.appendChild(thT)
+
+            let tboody = d.createElement('tboody')
+            table.appendChild(tboody)
+                let tr2 = d.createElement('tr')
+                tboody.appendChild(tr2)
+
+        Object.values(carrito).forEach(producto => {
+            let thI2 = d.createElement('th')
+            tr2.appendChild(thI2)
+
+                let img = d.createElement('img')
+                img.src = aVelas[producto.id].imagen
+                thI2.appendChild(img)
+
+        })
+    /* compra.innerHTML = ''
     
     const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad * precio, 0)
     console.log(nPrecio)
+
+
 
     let envio = d.createElement('p')
     envio.className = 'h4 text-secondary'
@@ -438,7 +499,7 @@ const pintarCompra = () => {
 
     let spanTotal = d.createElement('span')
     spanTotal.innerHTML = nPrecio + 600
-    total.appendChild(spanTotal)
+    total.appendChild(spanTotal) */
 
 }
 
@@ -457,7 +518,6 @@ const VerCarrito = e => {
 const VerProducto = e => {
     if(e.target.classList.contains('nav-link')) {
             sectionProductos.style.display = "block";
-
             home.style.display = "none";
             contacto.style.display = "none";
             sectionCarrito.style.display = "none";
@@ -469,7 +529,6 @@ const VerProducto = e => {
 const VerComprar = e => {
     if(e.target.classList.contains('btn-success')) {
             sectionCheckout.style.display = "block";
-
             home.style.display = "none";
             contacto.style.display = "none";
             sectionProductos.style.display = "none";
@@ -480,9 +539,7 @@ const VerComprar = e => {
 }
 const VerGracias = e => {
     if(e.target.classList.contains('btn')) {
-
         sectionGracias.style.display = "block";
-
         home.style.display = "none";
         contacto.style.display = "none";
         sectionProductos.style.display = "none";
@@ -495,7 +552,6 @@ const VerGracias = e => {
 const VerHome = e => {
     if(e.target.classList.contains('nav-link')) {
         home.style.display = "block";
-        
         contacto.style.display = "none";
         sectionProductos.style.display = "none";
         sectionCarrito.style.display = "none";
@@ -509,7 +565,6 @@ const VerHome = e => {
 const VerContacto = e => {
     if(e.target.classList.contains('nav-link')) {
         contacto.style.display = "block";
-        
         home.style.display = "none";
         sectionProductos.style.display = "none";
         sectionCarrito.style.display = "none";
