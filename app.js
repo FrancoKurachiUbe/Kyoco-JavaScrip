@@ -259,7 +259,7 @@ const pintarCarrito = () => {
         tr.classList = 'border align-middle'
         items.appendChild(tr)
 
-       let thId = d.createElement('th')
+       let thId = d.createElement('td')
        thId.innerHTML = producto.id
        tr.appendChild(thId)
 
@@ -418,11 +418,11 @@ const Checkout = () => {
         let span = d.createElement('span')
         span.classList = 'text-secondary d-flex flex-row-reverse'
         span.innerHTML = '1 de 2'
-        divDatos.appendChild(span)
+        divDatos.appendChild(span) 
 
 
     // Confirmar Datos y aceptar compra.
-    let divConfir = d.createElement('div')
+     let divConfir = d.createElement('div')
     divConfir.classList = 'col-5 bg-gris p-3 checkout'
     checkout.appendChild(divConfir)
 
@@ -431,75 +431,70 @@ const Checkout = () => {
         h2.classList = 'h5'
         divConfir.appendChild(h2)
 
-        let table = d.createElement('table')
-        table.classList = 'table text-center'
-        divConfir.appendChild(table)
-
-            let thead = d.createElement('thead')
-            table.appendChild(thead)
-
-                let tr = d.createElement('tr')
-                thead.appendChild(tr)
-
-                    let thI = d.createElement('th')
-                    thI.innerHTML = 'Imagen' 
-                    tr.appendChild(thI)
-
-                    let thN = d.createElement('th')
-                    thN.innerHTML = 'Nombre'
-                    tr.appendChild(thN)
-
-                    let thC = d.createElement('th')
-                    thC.innerHTML = 'Cantidad'
-                    tr.appendChild(thC)
-
-                    let thT = d.createElement('th')
-                    thT.innerHTML = 'Total'
-                    tr.appendChild(thT)
-
-            let tboody = d.createElement('tboody')
-            table.appendChild(tboody)
-                let tr2 = d.createElement('tr')
-                tboody.appendChild(tr2)
+        
 
         Object.values(carrito).forEach(producto => {
-            let thI2 = d.createElement('th')
-            tr2.appendChild(thI2)
+            
+            let ul = d.createElement('ul')
+            ul.classList = 'row text-center ps-1'
+            divConfir.appendChild(ul)
+
+            let liI = d.createElement('li')
+            liI.classList = 'd-inline col-3  border-white mx-auto pb-1'
+            ul.appendChild(liI)
 
                 let img = d.createElement('img')
                 img.src = aVelas[producto.id].imagen
-                thI2.appendChild(img)
+                img.style = 'max-with: 50px'//Esto no funciona
+                liI.appendChild(img)
 
+            let liN = d.createElement('li')
+            liN.innerHTML = aVelas[producto.id].nombre
+            liN.classList = 'd-inline col-3  border-white mx-auto pb-1'
+            ul.appendChild(liN)
+
+            let liC = d.createElement('li')
+            liC.innerHTML =producto.cantidad
+            liC.classList = 'd-inline col-3  border-white mx-auto pb-1'
+            ul.appendChild(liC)
+            
+            let liT = d.createElement('li') 
+            liT.innerHTML =producto.cantidad * aVelas[producto.id].precio
+            liT.classList = 'd-inline col-3  border-white mx-auto pb-1'
+            ul.appendChild(liT)
         })
-    /* compra.innerHTML = ''
     
-    const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad * precio, 0)
-    console.log(nPrecio)
+    
+        const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad * precio, 0)
+        console.log(nPrecio)
 
+        let subTotal = d.createElement('p')
+        subTotal.innerHTML = 'Subtotal: $'
+        //subTotal.className = 'h4 text-secondary'
+        divConfir.appendChild(subTotal)
 
+        let spanSubTotal = d.createElement('span')
+        spanSubTotal.innerHTML = nPrecio
+        subTotal.appendChild(spanSubTotal)
 
-    let envio = d.createElement('p')
-    envio.className = 'h4 text-secondary'
-    envio.innerHTML = 'Envio: $600'
-    compra.appendChild(envio)
+        let envio = d.createElement('p')
+        //envio.className = 'h4 text-secondary'
+        envio.innerHTML = 'Envio: $600'
+        divConfir.appendChild(envio)
 
-    let subTotal = d.createElement('p')
-    subTotal.innerHTML = 'Subtotal: $'
-    subTotal.className = 'h4 text-secondary'
-    compra.appendChild(subTotal)
+        let total = d.createElement('p')
+        //total.className = 'h2 pt-2'
+        total.innerHTML = 'Total: $'
+        divConfir.appendChild(total)
 
-    let spanSubTotal = d.createElement('span')
-    spanSubTotal.innerHTML = nPrecio
-    subTotal.appendChild(spanSubTotal)
+        let spanTotal = d.createElement('span')
+        spanTotal.innerHTML = nPrecio + 600
+        total.appendChild(spanTotal)
 
-    let total = d.createElement('p')
-    total.className = 'h2 pt-2'
-    total.innerHTML = 'Total: $'
-    compra.appendChild(total)
-
-    let spanTotal = d.createElement('span')
-    spanTotal.innerHTML = nPrecio + 600
-    total.appendChild(spanTotal) */
+        let button = d.createElement('button')
+        button.className = 'btn btn-success'
+        button.innerHTML = 'Aceptar'
+        divConfir.appendChild(button)
 
 }
 
