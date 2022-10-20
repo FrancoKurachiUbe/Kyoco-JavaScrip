@@ -409,7 +409,7 @@ const pintarMinicarrito = () => {
 }
 
 const Checkout = () => {
-    checkout.innerHTML= ''
+    /* checkout.innerHTML= ''
 
     let divDatos = d.createElement('div')
     divDatos.classList = 'col-6 mx-auto pt-2 border'
@@ -494,7 +494,7 @@ const Checkout = () => {
         let button = d.createElement('button')
         button.className = 'btn btn-success'
         button.innerHTML = 'Aceptar'
-        divConfir.appendChild(button)
+        divConfir.appendChild(button) */
 
 }
 
