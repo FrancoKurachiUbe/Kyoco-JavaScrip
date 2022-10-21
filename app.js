@@ -19,13 +19,13 @@ const sectionCheckout = d.getElementById('sectionCheckout')
 const sectionGracias = d.getElementById('sectionGracias')
 const sectionAmpliar = d.getElementById('sectionAmpliar')
 
-sectionCheckout.style.display = "none"; // esto cambia a none
+sectionCheckout.style.display = "block"; // esto cambia a none
 home.style.display = "none"; //esto se borra
 
 contacto.style.display = "none";
 sectionProductos.style.display = "none";
 sectionAmpliar.style.display = "none";
-sectionCarrito.style.display = "block";
+sectionCarrito.style.display = "none";
 
 sectionGracias.style.display = "none";
 
