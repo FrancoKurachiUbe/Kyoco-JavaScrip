@@ -20,7 +20,7 @@
 }
 
 .checkout {
-    /* height: 500px; */
+    height:15em;
     overflow-y: scroll;
 }
 

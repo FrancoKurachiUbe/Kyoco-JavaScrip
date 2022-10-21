@@ -136,7 +136,7 @@
 
     <section id="sectionCheckout" class="container-fluid">
         <div class="row contacto border " id="checkout">
-            <div class=" col-6 mx-auto pt-2 border  pb-3">
+            <div class=" col-md-12 col-lg-6 mx-auto pt-2 border  pb-3">
                 <span class=" text-secondary d-flex flex-row-reverse">1 de 2</span>
                 <form action="" >
                      <!-- 1 de 2 -------->
@@ -159,10 +159,12 @@
                         <label for="fechaEntrega" class="form-label">Fecha de entrega</label>
                         <input type="date" class="mb-3 form-control" id="fechaEntrega"  placeholder="fechaEntrega...">
                         <p>Costo de Envio $600</p>
-                        <button class="btn btn-success d-flex justify-content-end">Siguiente</button>
-                        
+                        <div style="text-align: right;">
+                            <button class="btn btn-success ">Siguiente</button>
+                        </div>
                     </div>
                     
+                    <!-- <div> -->
                     <div class="d-none"> <!-- 2 de 2 -------->
                         <h2 class="h4 border-bottom border-dark">Metodos de Pago</h2>
                         <div class="form-check py-3 rounded bg-light mt-3">
@@ -178,7 +180,7 @@
                             </label>
                         </div>
                         
-                        <div class="row">
+                        <div class="row mt-3">
                             <div class="form-group mb-3">
                                 <label for="dni" class="form-label">DNI</label>
                                 <input type="text" class="mb-3 form-control" id="dni" placeholder="Ingrese el DNI.">
@@ -195,16 +197,25 @@
                                 <label for="fecha" class="form-label">Fecha de Vencimiento</label>
                                 <input type="text" class="mb-3 form-control" id="fecha" placeholder="Ingrese la fecha de Vencimiento de la tarjeta.">
                             </div>
-                            <div class="col-6 form-group mb-3">
-                                <label for="cuotas" class="form-label">Cuotas</label>
-                                    <input type="text" class="mb-3 form-control" id="cuotas" placeholder="Ingrese la Cantidad de Cuotas.">
+                            <div class="col-auto form-group mb-3">
+                                <label for="fecha" class="form-label">Cuotas</label>
+                                <select class="form-select ">
+                                    <option selected>De 1 a 12</option>
+                                    <option value="1">1 Cuota</option>
+                                    <option value="2">3 Cuotas</option>
+                                    <option value="3">6 Cuotas</option>
+                                    <option value="4">12 Cuotas</option>
+                                  </select>
                             </div>
+                        </div>
+                        <div class="text-end">
+                            <button class="btn btn-success ">Siguiente</button>
                         </div>
                     </div>
                 </form>
             </div>
 
-            <div class=" col-5 bg-gris pt-4 position-relative ps-0">
+            <div class=" col-md-12 col-lg-5 bg-gris pt-4  ps-0">
                 <h2 class="h4 ps-3">Productos:</h2>  
                 <div class="checkout container mt-4 mb-4"> 
                     <ul class="row text-center ps-1 border-white align-items-center">
@@ -236,16 +247,23 @@
                         <li class="d-inline col-3 mx-auto pb-1">$6000</li>
                     </ul>
                 </div>
-                <div class="container position-absolute border-top bottom-0  pb-3">
-                    <ul class="row ps-1 ">
-                        <li class="d-inline col-9 pb-1"><h3 class="h6 text-secondary">Subtotal: </h3></li>
-                        <li class="d-inline col-3 text-center pb-1">$15000</li>
-                        <li class="d-inline col-9 pb-1"><h3 class="h6 text-secondary">Envio </h3></li>
-                        <li class="d-inline col-3 text-center pb-1">$600</li>
-                        <li class="d-inline col-9 pb-1"><h3 class="h5">Total </h3></li>
-                        <li class="d-inline col-3 text-center pb-1">$15600</li>
+                <div class="container  border-top bottom-0  pb-3">
+                    <ul class="row ps-1">
+                        <li class="d-inline col-8 h6 text-secondary pb-1">Direccion: </li>
+                        <li class="d-inline col-4 h6 text-end text-secondary pb-1">Calle Falsa 123 </li>
+                        <li class="d-inline col-8 h6 text-secondary pb-1">Fecha de Entrega </li>
+                        <li class="d-inline col-4 text-end text-secondary pb-1">xx/xx/xxxx</li>
+                        <li class="d-inline col-8 pb-1 h6 text-secondary">Subtotal:</li>
+                        <li class="d-inline col-4 text-end pb-1">$15000</li>
+                        <li class="d-inline col-8 h6 text-secondary pb-1">Envio</li>
+                        <li class="d-inline col-4 text-end pb-1">$600</li>
+                        <li class="d-inline col-8 h5 pb-1 ">Total</li>
+                        <li class="d-inline col-4 h4 text-end pb-1">$15600</li>
                     </ul>
-                    <button class="btn btn-success "> Aceptar</button>
+                    <div class="text-end">
+                        <button class="btn btn-success "> Aceptar</button>
+                    </div>
+                    
                 </div>
             </div>
         </div>
