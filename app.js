@@ -3,7 +3,9 @@ const d = document
 const cards = d.getElementById('cards')
 const items = d.getElementById('items')
 const ampliar = d.getElementById('ampliar')
-const checkout = d.getElementById('checkout')
+//const checkout = d.getElementById('checkout')
+const checkoutDatos = d.getElementById('checkoutDatos')
+const checkoutConfirm = d.getElementById('checkoutConfirm')
 
 const btnHome = d.getElementById('homeVer')
 const btnProductos = d.getElementById('productoVer')
@@ -19,13 +21,13 @@ const sectionCheckout = d.getElementById('sectionCheckout')
 const sectionGracias = d.getElementById('sectionGracias')
 const sectionAmpliar = d.getElementById('sectionAmpliar')
 
-sectionCheckout.style.display = "block"; // esto cambia a none
+sectionCheckout.style.display = "none"; // esto cambia a none
 home.style.display = "none"; //esto se borra
 
 contacto.style.display = "none";
 sectionProductos.style.display = "none";
 sectionAmpliar.style.display = "none";
-sectionCarrito.style.display = "none";
+sectionCarrito.style.display = "block"; // esto cambia a none 
 
 sectionGracias.style.display = "none";
 
@@ -37,6 +39,11 @@ const btnGracias = d.getElementById('graciasCompra')//????
 
 /*???*/ const fragment = d.createDocumentFragment()
 let carrito = {}
+/* let dato = {
+    direccion: null,
+    fecha:null,
+    tarjeta:null
+} */
 let aVelas = [
 	{
         "nombre":       "Night Smoke",
@@ -93,7 +100,15 @@ d.addEventListener('DOMContentLoaded', () => { fetchData()
 if(localStorage.getItem('carrito')){
     carrito= JSON.parse(localStorage.getItem('carrito'))
     pintarCarrito()
-    } 
+    }  
+    if(localStorage.getItem('dato')){
+        dato= JSON.parse(localStorage.getItem('dato'))
+        CheckoutConfirm() 
+    }
+    if(localStorage.getItem('pago')){
+        pago= JSON.parse(localStorage.getItem('pago'))
+        CheckoutConfirm() 
+    }
 })
 
 /* Interaciones de Botones */
@@ -101,6 +116,8 @@ cards.addEventListener('click', e => { addCarrito(e) })
 cards.addEventListener('click', e => { addAmpliar(e) })
 ampliar.addEventListener('click', e => { addCarrito(e) })
 items.addEventListener('click', e => { btnAumentarDisminuir(e) })
+/* checkoutDatos.addEventListener('click', e => { addDatos(e) }) 
+checkoutConfirm.addEventListener('click', e => { addDatos(e) }) */
 
 //btnGracias.addEventListener('click', e => { VerGracias(e) })
 // Botones del Menu
@@ -149,7 +166,6 @@ const pintarCards = aVelas => {
 
         let btnAmpliar = d.createElement('button');
         btnAmpliar.className = 'btn btn-outline-dark btn-lg'
-
         btnAmpliar.dataset.id = producto.id
         btnAmpliar.innerHTML = 'Ampliar'
         div1.appendChild(btnAmpliar);
@@ -237,6 +253,7 @@ const addCarrito = e => {
     e.stopPropagation() 
 }
 
+
 const setCarrito = objeto => {
     const producto = {
         id: objeto.querySelector('button').dataset.id,
@@ -248,7 +265,6 @@ const setCarrito = objeto => {
     }
     carrito[producto.id] = {...producto}
     pintarCarrito()
-    //Checkout() //creo que no va
 }
 
 const pintarCarrito = () => {
@@ -306,11 +322,10 @@ const pintarCarrito = () => {
    })
    pintarFooter()
    pintarMinicarrito()
-   //Checkout() //creo que no va tampoco
    btnaceptar()
 
    localStorage.setItem('carrito', JSON.stringify(carrito))
-   //console.log(carrito)
+   console.log(carrito)
 }
 
 
@@ -395,7 +410,9 @@ const btnaceptar = () => {
     btnCompra.className =  'btn btn-success'
     aceptarCompra.appendChild(btnCompra)
     btnCompra.addEventListener('click', e => { VerComprar(e)
-    Checkout()})
+    CheckoutDato()
+    CheckoutConfirm()
+})
 }
 
 /*--------- Mini Carrito ---------*/
@@ -408,94 +425,381 @@ const pintarMinicarrito = () => {
     minicarrito.querySelectorAll('span')[1].textContent = "$" + nPrecio
 }
 
-const Checkout = () => {
-    /* checkout.innerHTML= ''
+/* const Checkout = () => {
+    checkout.innerHTML = ''
+    let divGeneral = d.createElement('div')
+    divGeneral.classList = 'col-md-12 col-lg-6 mx-auto pt-2 border  pb-3'
+    checkout.appendChild(divGeneral)
+    
+    let span = d.createElement('span')
+    span.classList = 'text-secondary d-flex flex-row-reverse'
+    span.innerHTML = '2 de 2'
+    divGeneral.appendChild(span)
 
-    let divDatos = d.createElement('div')
-    divDatos.classList = 'col-6 mx-auto pt-2 border'
-    checkout.appendChild(divDatos)
+    let form = d.createElement('form')
+    form.id = 'form'
+    divGeneral.appendChild(form)
 
-        let span = d.createElement('span')
-        span.classList = 'text-secondary d-flex flex-row-reverse'
-        span.innerHTML = '1 de 2'
-        divDatos.appendChild(span) 
+    let divConfirm = d.createElement('div')
+    divConfirm.id = 'confirmar'
+    divConfirm.classList = 'col-md-12 col-lg-5 bg-gris pt-4  ps-0'
+    divGeneral.appendChild(divConfirm)
+
+    CheckoutDato()
+    
+} */
+
+const CheckoutDato = () => {
+    checkoutDatos.innerHTML = ''
+
+    let span = d.createElement('span')
+    span.classList = 'text-secondary d-flex flex-row-reverse'
+    span.innerHTML = '2 de 2'
+    checkoutDatos.appendChild(span)
+
+    let form = d.createElement('form')
+    form.id = 'form'
+    checkoutDatos.appendChild(form)
+
+    let div2 = d.createElement('div')
+    div2.classList = 'pt-2'
+    form.appendChild(div2)
+
+    let h2 = d.createElement('h2')
+    h2.innerHTML = 'Datos Personales'
+    h2.classList = 'h4 border-bottom border-dark'
+    div2.appendChild(h2)
+
+    let nombre = d.createElement('label')
+    nombre.innerHTML = 'Nombre'
+    nombre.classList = 'form-label'
+    // for
+    div2.appendChild(nombre)
+    let nombreInp = d.createElement('input')
+    // type.
+    // Id.
+    // place Holder.
+    nombreInp.classList = 'mb-3 form-control'
+    div2.appendChild(nombreInp)
+
+    let email = d.createElement('label')
+    email.innerHTML = 'Email'
+    email.classList = 'form-label'
+    div2.appendChild(email)
+    let emailInp= d.createElement('input')
+    // type.
+    // Id.
+    // place Holder.
+    emailInp.classList = 'mb-3 form-control'
+    div2.appendChild(emailInp)
+
+    let telefono = d.createElement('label')
+    telefono.innerHTML = 'Telefono'
+    telefono.classList = 'form-label'
+    div2.appendChild(telefono)
+    let telefonoInp= d.createElement('input')
+    // type.
+    // Id.
+    // place Holder.
+    telefonoInp.classList = 'mb-3 form-control'
+    div2.appendChild(telefonoInp)
+
+    let envio = d.createElement('h2')
+    envio.innerHTML = 'Envio'
+    envio.classList = 'h4 border-bottom border-dark ps-3'
+    div2.appendChild(envio)
+
+    let direccion = d.createElement('label')
+    direccion.innerHTML = 'Direccion'
+    direccion.classList = 'form-label'
+    div2.appendChild(direccion)
+    let direccionInp= d.createElement('input')
+    // type.
+    
+    // place Holder.
+    direccionInp.id = 'direccion'
+    direccionInp.classList = 'mb-3 form-control'
+    div2.appendChild(direccionInp)
+
+    let fecha = d.createElement('label')
+    fecha.innerHTML = 'Fecha de entrega'
+    fecha.classList = 'form-label'
+    div2.appendChild(fecha)
+    let fechaInp = d.createElement('input')
+    // type.
+    
+    // place Holder.
+    fechaInp.id = 'fecha'
+    fechaInp.classList = 'mb-3 form-control'
+    div2.appendChild(fechaInp)
+
+    let costo = d.createElement('p')
+    costo.innerHTML = 'Costo de Envio $600'
+    div2.appendChild(costo)
+
+    let divBtn = d.createElement('div')
+    divBtn.classList = 'text-end'
+    div2.appendChild(divBtn)
+
+    let button = d.createElement('button')
+    button.className = 'btn btn-success'
+    button.innerHTML = 'Siguiente'
+    divBtn.appendChild(button)
+
+    button.addEventListener('click', {
+
+    })
+    button.addEventListener('click', e => { 
+         dato = {
+            direccion: direccionInp.value,
+            fecha: fechaInp.value,
+        }
+        console.log(dato)
+        localStorage.setItem('dato', JSON.stringify(dato))
+        
+        CheckoutPago()
+        CheckoutConfirm()
+        CheckoutSub()
+        
+    })
+}
+
+/* const addDatos = e => {
+    if (e.target.classList.contains('btn-success')) {
+        console.log(e.target.parentElement.parentElement.parentElement)
+        setDatos(e.target.parentElement.parentElement.parentElement)
+    }
+    e.stopPropagation() 
+}
 
 
-    // Confirmar Datos y aceptar compra.
-     let divConfir = d.createElement('div')
-    divConfir.classList = 'col-5 bg-gris p-3 checkout'
-    checkout.appendChild(divConfir)
+const setDatos = objeto => {
+    
+    const datos = {
+        direccion: objeto.querySelector('#direccion').value,
+        fecha: objeto.querySelector('#fecha').value,
+        tarjeta: objeto.querySelector('#tarjeta').value
+    }
+    console.log(datos)
+    CheckoutPago()
+    CheckoutConfirm()
+} */
+
+
+const CheckoutPago = () => {
+
+    let form = d.getElementById('form')
+     form.innerHTML = ''
+    
+    let div = d.createElement('div')
+    div.classList = 'pt-2'
+    form.appendChild(div)
+
+    let h2 = d.createElement('h2')
+    h2.innerHTML = 'Metodos de Pago'
+    h2.classList = 'h4 border-bottom border-dark'
+    div.appendChild(h2)
+
+    // Efectivo
+    // Tarjeta
+    // DNI
+    let divTarj = d.createElement('div')
+    divTarj.classList = 'form-group mb-3'
+    div.append(divTarj)
+    let labelTarj = d.createElement('label')
+    labelTarj.classList = 'form-label'
+    labelTarj.innerHTML = 'Numero de la Tarjeta'
+    // for
+    divTarj.appendChild(labelTarj)
+    let inputTarj = d.createElement('input')
+    inputTarj.classList = 'mb-3 form-control'
+    // type
+    inputTarj.id = 'tarjeta'
+    // placeholder
+    divTarj.appendChild(inputTarj)
+
+    let divBtn = d.createElement('div')
+    divBtn.classList = 'text-end'
+    div.appendChild(divBtn)
+
+    let cancelar = d.createElement('button')
+    cancelar.className = 'btn btn-danger'
+    cancelar.innerHTML = 'Cancelar'
+    divBtn.appendChild(cancelar)
+
+    let siguiente = d.createElement('button')
+    siguiente.className = 'btn btn-success'
+    siguiente.innerHTML = 'Siguiente'
+    divBtn.appendChild(siguiente)
+
+    cancelar.addEventListener('click', e => { 
+        CheckoutDato()
+        /* let direccionInfo = direccionInp.value
+        console.log(direccionInfo) */
+    })
+
+    siguiente.addEventListener('click', e => { 
+        pago = {
+           tarjeta: inputTarj.value,
+           //fecha: inputTarj.value
+       }
+       //console.log(pago)
+       localStorage.setItem('pago', JSON.stringify(pago))
+       
+       CheckoutPago()
+       CheckoutConfirm()
+       CheckoutSub()
+       
+   })
+
+}
+
+
+
+
+const CheckoutConfirm = () => {  
+     
+     checkoutConfirm.innerHTML = ''
 
         let h2 = d.createElement('h2')
         h2.innerHTML = 'Productos:'
-        h2.classList = 'h5'
-        divConfir.appendChild(h2)
+        h2.classList = 'h4 ps-3'
+        checkoutConfirm.appendChild(h2)
 
-        
+        let divConfir = d.createElement('div')
+        divConfir.classList = 'checkout container mt-4 mb-4'
+        checkoutConfirm.appendChild(divConfir)
 
         Object.values(carrito).forEach(producto => {
             
             let ul = d.createElement('ul')
-            ul.classList = 'row text-center ps-1'
+            ul.classList = 'row text-center ps-1 border-white align-items-center'
             divConfir.appendChild(ul)
 
             let liI = d.createElement('li')
-            liI.classList = 'd-inline col-3  border-white mx-auto pb-1'
+            liI.classList = 'd-inline col-3 mx-auto pb-1'
             ul.appendChild(liI)
 
                 let img = d.createElement('img')
                 img.src = aVelas[producto.id].imagen
-                img.style = 'max-with: 50px'//Esto no funciona
+                img.style.setProperty("max-width", "50px")
                 liI.appendChild(img)
 
             let liN = d.createElement('li')
             liN.innerHTML = aVelas[producto.id].nombre
-            liN.classList = 'd-inline col-3  border-white mx-auto pb-1'
+            liN.classList = 'd-inline col-3  mx-auto pb-1'
             ul.appendChild(liN)
 
             let liC = d.createElement('li')
             liC.innerHTML =producto.cantidad
-            liC.classList = 'd-inline col-3  border-white mx-auto pb-1'
+            liC.classList = 'd-inline col-3  mx-auto pb-1'
             ul.appendChild(liC)
             
             let liT = d.createElement('li') 
             liT.innerHTML =producto.cantidad * aVelas[producto.id].precio
-            liT.classList = 'd-inline col-3  border-white mx-auto pb-1'
+            liT.classList = 'd-inline col-3  mx-auto pb-1'
             ul.appendChild(liT)
         })
-    
-    
+
         const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad * precio, 0)
-        console.log(nPrecio)
+        //console.log(nPrecio)
 
-        let subTotal = d.createElement('p')
-        subTotal.innerHTML = 'Subtotal: $'
-        //subTotal.className = 'h4 text-secondary'
-        divConfir.appendChild(subTotal)
+        let divFoot = d.createElement('div')
+        divFoot.classList = 'container  border-top bottom-0  pb-3'
+        checkoutConfirm.appendChild(divFoot)
 
-        let spanSubTotal = d.createElement('span')
-        spanSubTotal.innerHTML = nPrecio
-        subTotal.appendChild(spanSubTotal)
+        let ul = d.createElement('ul')
+        ul.classList = 'row ps-1'
+        ul.id = 'subdatos'
+        divFoot.appendChild(ul)
 
-        let envio = d.createElement('p')
-        //envio.className = 'h4 text-secondary'
-        envio.innerHTML = 'Envio: $600'
-        divConfir.appendChild(envio)
+            let subtotal = d.createElement('li')
+            subtotal.innerHTML= 'Subtotal'
+            subtotal.id = 'subtotal'
+            subtotal.classList = 'd-inline col-6 pb-1 h6 text-secondary'
+            ul.appendChild(subtotal)
 
-        let total = d.createElement('p')
-        //total.className = 'h2 pt-2'
-        total.innerHTML = 'Total: $'
-        divConfir.appendChild(total)
+            let subtotalDato = d.createElement('li')
+            subtotalDato.innerHTML = '$15000'
+            subtotalDato.classList = 'd-inline col-6 text-end pb-1'
+            ul.appendChild(subtotalDato)
 
-        let spanTotal = d.createElement('span')
-        spanTotal.innerHTML = nPrecio + 600
-        total.appendChild(spanTotal)
+            let envio = d.createElement('li')
+            envio.innerHTML = 'Envio'
+            envio.classList = 'd-inline col-6 h6 text-secondary pb-1'
+            ul.appendChild(envio)
+
+            let envioDato = d.createElement('li')
+            envioDato.innerHTML = '$600'
+            envioDato.classList = 'd-inline col-6 text-end pb-1'
+            ul.appendChild(envioDato)
+
+            let total  = d.createElement('li')
+            total.innerHTML= 'Total'
+            total.classList = 'd-inline col-6 h5 pb-1'
+            ul.appendChild(total)
+
+            let totalDato = d.createElement('li')
+            totalDato.innerHTML = '$15600'
+            totalDato.classList = 'd-inline col-6 h4 text-end pb-1'
+            ul.appendChild(totalDato)
+
+        let divBtn = d.createElement('div')
+        divBtn.classList = 'text-end'
+        divFoot.appendChild(divBtn)
 
         let button = d.createElement('button')
         button.className = 'btn btn-success'
         button.innerHTML = 'Aceptar'
-        divConfir.appendChild(button) */
+        divBtn.appendChild(button)
+}
 
+const CheckoutSub = () => {
+    if(localStorage.getItem('dato') ){
+        dato= JSON.parse(localStorage.getItem('dato'))
+        
+    }
+    if(localStorage.getItem('pago') ){
+        pago= JSON.parse(localStorage.getItem('pago'))
+    }  
+    //console.log(dato)
+
+    let ul = d.getElementById('subdatos')
+    let subtotal = d.getElementById('subtotal')
+    
+    let direc = d.createElement('li')
+        direc.innerHTML= 'Direccion'
+        direc.classList = 'd-inline col-6 h6 text-secondary pb-1'
+        ul.insertBefore(direc, subtotal)
+    let direcDato = d.createElement('li')
+        direcDato.innerHTML = dato.direccion
+        //direcDato.innerHTML = 'direccion'
+        direcDato.classList = 'd-inline col-6 h6 text-end text-secondary pb-1'
+        ul.insertBefore(direcDato, subtotal)
+
+    let entrega = d.createElement('li')
+        entrega.innerHTML= 'Fecha de entrega'
+        entrega.classList = 'd-inline col-6 h6 text-secondary pb-1'
+        ul.insertBefore(entrega, subtotal)
+    let entregaDato = d.createElement('li')
+        entregaDato.innerHTML= dato.fecha
+        //entregaDato.innerHTML= 'fecha'
+        entregaDato.classList = 'd-inline col-6 text-end text-secondary pb-1'
+        ul.insertBefore(entregaDato, subtotal)
+    
+    let metodo = d.createElement('li')
+        metodo.innerHTML= 'Metodo de pago:'
+        metodo.classList = 'd-inline col-6 h6 text-secondary pb-1'
+        //ul.appendChild(metodo)
+        ul.insertBefore(metodo, subtotal)
+
+    
+    let pagoDato = d.createElement('li')
+        //pagoDato.innerHTML = 'Visa 1234 en 6 Cuotas'
+        pagoDato.innerHTML = pago.tarjeta
+        pagoDato.classList = 'd-inline col-6 text-end text-secondary pb-1'
+        //ul.appendChild(pagoDato)
+        ul.insertBefore(pagoDato, subtotal)
 }
 
 // Botones para ver las secciones del HTMl.
