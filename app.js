@@ -454,11 +454,13 @@ const CheckoutDato = () => {
 
     let span = d.createElement('span')
     span.classList = 'text-secondary d-flex flex-row-reverse'
-    span.innerHTML = '2 de 2'
+    span.innerHTML = '1 de 2'
     checkoutDatos.appendChild(span)
 
     let form = d.createElement('form')
     form.id = 'form'
+    //form.action = true
+    //form.method = 'POST'
     checkoutDatos.appendChild(form)
 
     let div2 = d.createElement('div')
@@ -471,119 +473,141 @@ const CheckoutDato = () => {
     div2.appendChild(h2)
 
     let nombre = d.createElement('label')
-    nombre.innerHTML = 'Nombre'
-    nombre.classList = 'form-label'
-    // for
-    div2.appendChild(nombre)
+        nombre.innerHTML = 'Nombre'
+        nombre.classList = 'mt-3 form-label'
+        // for
+        div2.appendChild(nombre)
     let nombreInp = d.createElement('input')
-    // type.
-    // Id.
-    // place Holder.
-    nombreInp.classList = 'mb-3 form-control'
-    div2.appendChild(nombreInp)
+        nombreInp.classList = ' form-control'
+        nombreInp.id = 'nombre'
+        nombreInp.type = 'text'
+        nombreInp.placeholder = 'Ingrese su Nombre.'
+        nombreInp.required = true
+        div2.appendChild(nombreInp)
+    let errNombre = d.createElement('span')
+        errNombre.innerHTML = 'El nombre es obligatorio'
+        errNombre.style.display = 'none'
+        errNombre.classList = 'text-danger mt-1 ms-1'
+        div2.appendChild(errNombre)
 
     let email = d.createElement('label')
-    email.innerHTML = 'Email'
-    email.classList = 'form-label'
-    div2.appendChild(email)
+        email.innerHTML = 'Email'
+        email.classList = 'mt-3 form-label'
+        // for
+        div2.appendChild(email)
     let emailInp= d.createElement('input')
-    // type.
-    // Id.
-    // place Holder.
-    emailInp.classList = 'mb-3 form-control'
-    div2.appendChild(emailInp)
+        emailInp.classList = 'form-control'
+        emailInp.id = 'email' 
+        emailInp.type = 'text'
+        emailInp.placeholder = 'Ingrese su Email.'
+        emailInp.required = true
+        div2.appendChild(emailInp)
+    let errEmail = d.createElement('span')
+        errEmail.innerHTML = 'El Email es obligatorio'
+        errEmail.style.display = 'none'
+        errEmail.classList = 'text-danger mt-1 ms-1'
+        div2.appendChild(errEmail)
 
     let telefono = d.createElement('label')
-    telefono.innerHTML = 'Telefono'
-    telefono.classList = 'form-label'
-    div2.appendChild(telefono)
+        telefono.innerHTML = 'Telefono'
+        telefono.classList = 'mt-3 form-label'
+        div2.appendChild(telefono)
     let telefonoInp= d.createElement('input')
-    // type.
-    // Id.
-    // place Holder.
-    telefonoInp.classList = 'mb-3 form-control'
-    div2.appendChild(telefonoInp)
+        telefonoInp.classList = ' form-control'
+        telefonoInp.id = 'telefono'
+        telefonoInp.type = 'text'
+        telefonoInp.placeholder = 'Ingrese su numero de Telefono.'
+        telefonoInp.required = true
+        div2.appendChild(telefonoInp)
+    let errTel = d.createElement('span')
+        errTel.innerHTML = 'El Telefono es obligatorio'
+        errTel.style.display = 'none'
+        errTel.classList = 'text-danger mt-1 ms-1'
+        div2.appendChild(errTel)
 
     let envio = d.createElement('h2')
-    envio.innerHTML = 'Envio'
-    envio.classList = 'h4 border-bottom border-dark ps-3'
-    div2.appendChild(envio)
+        envio.innerHTML = 'Envio'
+        envio.classList = 'mt-3 h4 border-bottom border-dark ps-3'
+        div2.appendChild(envio)
 
     let direccion = d.createElement('label')
-    direccion.innerHTML = 'Direccion'
-    direccion.classList = 'form-label'
-    div2.appendChild(direccion)
+        direccion.innerHTML = 'Direccion'
+        direccion.classList = 'form-label mt-3'
+        div2.appendChild(direccion)
     let direccionInp= d.createElement('input')
-    // type.
-    
-    // place Holder.
-    direccionInp.id = 'direccion'
-    direccionInp.classList = 'mb-3 form-control'
-    div2.appendChild(direccionInp)
+        direccionInp.classList = ' form-control'
+        direccionInp.id = 'direccion'
+        direccionInp.type = 'text'
+        direccionInp.placeholder = 'Ingrese su Direccion.'
+        direccionInp.required = true
+        div2.appendChild(direccionInp)
+    let errDirecc = d.createElement('span')
+        errDirecc.innerHTML = 'La direccion es obligatorio'
+        errDirecc.style.display = 'none'
+        errDirecc.classList = 'text-danger mt-1 ms-1'
+        div2.appendChild(errDirecc)
 
     let fecha = d.createElement('label')
-    fecha.innerHTML = 'Fecha de entrega'
-    fecha.classList = 'form-label'
-    div2.appendChild(fecha)
+        fecha.innerHTML = 'Fecha de entrega'
+        fecha.classList = 'form-label mt-3'
+        div2.appendChild(fecha)
     let fechaInp = d.createElement('input')
-    // type.
-    
-    // place Holder.
-    fechaInp.id = 'fecha'
-    fechaInp.classList = 'mb-3 form-control'
-    div2.appendChild(fechaInp)
+        fechaInp.classList = 'form-control'
+        fechaInp.id = 'fecha'
+        fechaInp.type = 'date'
+        fechaInp.required = true
+        div2.appendChild(fechaInp)
+    let errFecha = d.createElement('span')
+        errFecha.innerHTML = 'La Fecha es obligatoria'
+        errFecha.style.display = 'none'
+        errFecha.classList = 'text-danger mt-1 ms-1'
+        div2.appendChild(errFecha)
 
     let costo = d.createElement('p')
-    costo.innerHTML = 'Costo de Envio $600'
-    div2.appendChild(costo)
+        costo.innerHTML = 'Costo de Envio $600'
+        costo.classList = 'h4 mt-3'
+        div2.appendChild(costo)
 
     let divBtn = d.createElement('div')
-    divBtn.classList = 'text-end'
-    div2.appendChild(divBtn)
+        divBtn.classList = 'text-end'
+        div2.appendChild(divBtn)
 
     let button = d.createElement('button')
-    button.className = 'btn btn-success'
-    button.innerHTML = 'Siguiente'
-    divBtn.appendChild(button)
+        button.className = 'btn btn-success'
+        button.innerHTML = 'Siguiente'
+        button.type = 'submit'
+        divBtn.appendChild(button)
 
-    button.addEventListener('click', {
-
-    })
     button.addEventListener('click', e => { 
-         dato = {
-            direccion: direccionInp.value,
-            fecha: fechaInp.value,
-        }
-        console.log(dato)
-        localStorage.setItem('dato', JSON.stringify(dato))
-        
-        CheckoutPago()
-        CheckoutConfirm()
-        CheckoutSub()
-        
+        /* if (nombreInp.value.length == 0 ){
+                errNombre.style.display = 'block'
+                nombreInp.classList ='form-control border-danger'
+        }if (emailInp.value.length == 0 ){
+            errEmail.style.display = 'block'
+            emailInp.classList ='form-control border-danger'
+        }if (telefonoInp.value.length == 0 ){
+            errTel.style.display = 'block'
+            telefonoInp.classList ='form-control border-danger'
+        }if (direccionInp.value.length == 0 ){
+            errDirecc.style.display = 'block'
+            direccionInp.classList ='form-control border-danger'
+        }if (fechaInp.value.length == 0 ){
+            errFecha.style.display = 'block'
+            fechaInp.classList ='form-control border-danger'        }
+        else { */
+            dato = {
+                direccion: direccionInp.value,
+                fecha: fechaInp.value,
+            }
+            console.log(dato)
+            localStorage.setItem('dato', JSON.stringify(dato))
+            
+            CheckoutPago()
+            CheckoutConfirm()
+            CheckoutSub()
+        //}
     })
 }
-
-/* const addDatos = e => {
-    if (e.target.classList.contains('btn-success')) {
-        console.log(e.target.parentElement.parentElement.parentElement)
-        setDatos(e.target.parentElement.parentElement.parentElement)
-    }
-    e.stopPropagation() 
-}
-
-
-const setDatos = objeto => {
-    
-    const datos = {
-        direccion: objeto.querySelector('#direccion').value,
-        fecha: objeto.querySelector('#fecha').value,
-        tarjeta: objeto.querySelector('#tarjeta').value
-    }
-    console.log(datos)
-    CheckoutPago()
-    CheckoutConfirm()
-} */
 
 
 const CheckoutPago = () => {
@@ -600,47 +624,159 @@ const CheckoutPago = () => {
     h2.classList = 'h4 border-bottom border-dark'
     div.appendChild(h2)
 
-    // Efectivo
-    // Tarjeta
-    // DNI
+    //Metodo Efectivo
+    
+// DNI
+    let divDni = d.createElement('div')
+        divDni.classList = 'form-group mt-3'
+        div.appendChild(divDni)
+    let dni = d.createElement('label')
+        dni.innerHTML = 'Numero de su DNI' 
+        dni.classList = 'mt-3 form-label'
+        // for
+        divDni.appendChild(dni)
+    let dniInp = d.createElement('input')
+        dniInp.classList = 'form-control'
+        dniInp.id = 'dni'
+        dniInp.type = 'num' //checkear este campo
+        dniInp.placeholder = 'Ingrese su DNI.'
+        dniInp.required = true
+        divDni.appendChild(dniInp)
+    let errDni = d.createElement('span')
+        errDni.innerHTML = 'El nombre es obligatorio'
+        errDni.style.display = 'none'
+        errDni.classList = 'text-danger mt-1 ms-1'
+        divDni.appendChild(errDni)
+
+// Numero de Tarjeta
     let divTarj = d.createElement('div')
-    divTarj.classList = 'form-group mb-3'
-    div.append(divTarj)
-    let labelTarj = d.createElement('label')
-    labelTarj.classList = 'form-label'
-    labelTarj.innerHTML = 'Numero de la Tarjeta'
-    // for
-    divTarj.appendChild(labelTarj)
-    let inputTarj = d.createElement('input')
-    inputTarj.classList = 'mb-3 form-control'
-    // type
-    inputTarj.id = 'tarjeta'
-    // placeholder
-    divTarj.appendChild(inputTarj)
+        divTarj.classList = 'form-group mb-3'
+        div.appendChild(divTarj)
+    let tarjeta = d.createElement('label')
+        tarjeta.innerHTML = 'Numero de la Tarjeta'
+        tarjeta.classList = 'mt-3 form-label'
+        // for
+        divTarj.appendChild(tarjeta)
+    let tarjetaInp = d.createElement('input')
+        tarjetaInp.classList = 'form-control'
+        tarjetaInp.id = 'tarjeta'
+        tarjetaInp.type = 'num' // revisar este cararcter
+        tarjetaInp.placeholder = 'Ingrese el numero de la tarjeta.'
+        dniInp.required = true
+        divTarj.appendChild(tarjetaInp)
+    let errtarj = d.createElement('span')
+        errtarj.innerHTML = 'El numero de la tarjeta es obligatorio'
+        errtarj.style.display = 'none'
+        errtarj.classList = 'text-danger mt-1 ms-1'
+        divTarj.appendChild(errtarj)
 
+// codigo de seguridad
+        let divseguri = d.createElement('div')
+        divseguri.classList = 'form-group mt-3'
+        div.appendChild(divseguri)
+    let seguridad = d.createElement('label')
+        seguridad.innerHTML = 'ingrese los 3 numeros al reverso de su tarjeta' 
+        seguridad.classList = 'mt-3 form-label'
+        // for
+        divseguri.appendChild(dni)
+    let seguriInp = d.createElement('input')
+        seguriInp.classList = 'form-control'
+        seguriInp.id = 'dni'
+        seguriInp.type = 'num' //checkear este campo
+        seguriInp.placeholder = 'Ingreseel codigo de seguridad'
+        seguriInp.required = true
+        divseguri.appendChild(seguriInp)
+    let errSegu = d.createElement('span')
+        errSegu.innerHTML = 'El codigo de seguridad es obligatorio'
+        errSegu.style.display = 'none'
+        errSegu.classList = 'text-danger mt-1 ms-1'
+        divseguri.appendChild(errSegu)
+
+
+// fecha de vencimiento
+    let divVenc = d.createElement('div')
+        divVenc.classList = 'form-group mt-3'
+        div.appendChild(divVenc)
+    let vencimiento = d.createElement('label')
+        vencimiento.innerHTML = 'ingrese la fecha de vencimiento de su tarjeta' 
+        vencimiento.classList = 'mt-3 form-label'
+        // for
+        divVenc.appendChild(vencimiento)
+    let vencInp = d.createElement('input')
+        vencInp.classList = 'form-control'
+        vencInp.id = 'dni'
+        vencInp.type = 'date' //checkear este campo
+        vencInp.placeholder = 'Ingreseel la fecha de Vencimiento'
+        vencInp.required = true
+        divVenc.appendChild(vencInp)
+    let errVenc = d.createElement('span')
+        errVenc.innerHTML = 'El Vencimiento de la tarjeta es obligatorio'
+        errVenc.style.display = 'none'
+        errVenc.classList = 'text-danger mt-1 ms-1'
+        divVenc.appendChild(errVenc)
+// cuotas
+    let divCuotas = d.createElement('div')
+        divCuotas.classList = 'form-group mt-3'
+        div.appendChild(divCuotas)
+    let cuotas = d.createElement('label')
+        cuotas.innerHTML = 'ingrese la cantidad de cuotas' 
+        cuotas.classList = 'mt-3 form-label'
+        // for
+        divCuotas.appendChild(cuotas)
+    let cuotasSelec = d.createElement('select')
+        cuotasSelec.classList = 'form-select'
+        cuotasSelec.id = 'dni'
+        cuotasSelec.type = 'num' //checkear este campo
+        //cuotasInp.placeholder = 'Ingrese la cantidad de cuotas'
+        cuotasSelec.required = true
+        divCuotas.appendChild(cuotasSelec)    
+            for (i=1; i<7; i++){
+                let cuota = i
+                if(i == 1){
+                    cuota +=' Cuota'
+                } else {
+                    cuota +=' Cuotas'
+                }
+                let options = d.createElement('option')
+                options.innerHTML = cuota
+                cuotasSelec.appendChild(options)
+            }
+
+// Botones
     let divBtn = d.createElement('div')
-    divBtn.classList = 'text-end'
-    div.appendChild(divBtn)
+        divBtn.classList = 'text-end mt-3'
+        div.appendChild(divBtn)
 
-    let cancelar = d.createElement('button')
-    cancelar.className = 'btn btn-danger'
-    cancelar.innerHTML = 'Cancelar'
-    divBtn.appendChild(cancelar)
+        let cancelar = d.createElement('button')
+            cancelar.className = 'btn btn-danger'
+            cancelar.innerHTML = 'Cancelar'
+            divBtn.appendChild(cancelar)
 
-    let siguiente = d.createElement('button')
-    siguiente.className = 'btn btn-success'
-    siguiente.innerHTML = 'Siguiente'
-    divBtn.appendChild(siguiente)
+        let siguiente = d.createElement('button')
+            siguiente.className = 'btn btn-success'
+            siguiente.innerHTML = 'Siguiente'
+            divBtn.appendChild(siguiente)
 
     cancelar.addEventListener('click', e => { 
         CheckoutDato()
-        /* let direccionInfo = direccionInp.value
-        console.log(direccionInfo) */
     })
 
     siguiente.addEventListener('click', e => { 
+         if (dniInp.value.length == 0 ){
+                errDni.style.display = 'block'
+                dniInp.classList ='form-control border-danger'
+        }if (tarjetaInp.value.length == 0 ){
+            errtarj.style.display = 'block'
+            tarjetaInp.classList ='form-control border-danger'
+        }if (seguriInp.value.length == 0 ){
+            errSegu.style.display = 'block'
+            seguriInp.classList ='form-control border-danger'
+        }if (vencInp.value.length == 0 ){
+            errVenc.style.display = 'block'
+            vencInp.classList ='form-control border-danger'
+        } else {
         pago = {
-           tarjeta: inputTarj.value,
+           tarjeta: tarjetaInp.value,
            //fecha: inputTarj.value
        }
        //console.log(pago)
@@ -649,13 +785,11 @@ const CheckoutPago = () => {
        CheckoutPago()
        CheckoutConfirm()
        CheckoutSub()
+       }
        
    })
 
 }
-
-
-
 
 const CheckoutConfirm = () => {  
      
@@ -720,7 +854,7 @@ const CheckoutConfirm = () => {
             ul.appendChild(subtotal)
 
             let subtotalDato = d.createElement('li')
-            subtotalDato.innerHTML = '$15000'
+            subtotalDato.innerHTML = nPrecio
             subtotalDato.classList = 'd-inline col-6 text-end pb-1'
             ul.appendChild(subtotalDato)
 
@@ -740,7 +874,7 @@ const CheckoutConfirm = () => {
             ul.appendChild(total)
 
             let totalDato = d.createElement('li')
-            totalDato.innerHTML = '$15600'
+            totalDato.innerHTML = nPrecio + 600
             totalDato.classList = 'd-inline col-6 h4 text-end pb-1'
             ul.appendChild(totalDato)
 
@@ -748,10 +882,19 @@ const CheckoutConfirm = () => {
         divBtn.classList = 'text-end'
         divFoot.appendChild(divBtn)
 
-        let button = d.createElement('button')
-        button.className = 'btn btn-success'
-        button.innerHTML = 'Aceptar'
-        divBtn.appendChild(button)
+        let cancelar = d.createElement('button')
+        cancelar.className = 'btn btn-danger'
+        cancelar.innerHTML = 'Cancelar'
+        divBtn.appendChild(cancelar)
+        cancelar.addEventListener('click', e => { 
+            
+        })
+
+        let aceptar = d.createElement('button')
+        aceptar.className = 'btn btn-success'
+        aceptar.innerHTML = 'Aceptar'
+        divBtn.appendChild(aceptar)
+        
 }
 
 const CheckoutSub = () => {
