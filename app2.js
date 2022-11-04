@@ -1,45 +1,49 @@
 
 const d = document
-const section = d.getElementById('section') 
-const home = d.getElementById('home')
-const contacto = d.getElementById('contacto')
-
-home.style.display = 'none'
-contacto.style.display = 'none'
-
-//section.style.display = 'none'
+const cards = d.getElementById('cards')
+const items = d.getElementById('items')
+const ampliar = d.getElementById('ampliar')
+//const checkout = d.getElementById('checkout')
+const checkoutDatos = d.getElementById('checkoutDatos')
+const checkoutConfirm = d.getElementById('checkoutConfirm')
 
 const btnHome = d.getElementById('homeVer')
 const btnProductos = d.getElementById('productoVer')
 const btnContacto = d.getElementById('contactoVer')
 const btnCarrito = d.getElementById('carrito')
 
-// Interaciones de Botones.
-btnProductos.addEventListener('click', e => { sectionProductos(e)
-    home.style.display = 'none'
-    contacto.style.display = 'none'
-    section.style.display = 'block'
-})
-btnCarrito.addEventListener('click', e => { sectionCarrito(e) 
-    home.style.display = 'none'
-    contacto.style.display = 'none'
-    section.style.display = 'block'
-})
-btnHome.addEventListener('click', e => {
-    //home.style.display = 'block'
-    //section.style.display = 'none'
-    sectionHome()
-  })
-  btnContacto.addEventListener('click', e => {
-    home.style.display = 'none'
-    section.style.display = 'none'
-    contacto.style.display = 'block'
-    
-  })
+/* secciones del html */
+const home = d.getElementById('home')
+const contacto = d.getElementById('contacto')
+const sectionProductos = d.getElementById('sectionProductos')
+const sectionCarrito = d.getElementById('sectionCarrito')
+const sectionCheckout = d.getElementById('sectionCheckout')
+const sectionGracias = d.getElementById('sectionGracias')
+const sectionAmpliar = d.getElementById('sectionAmpliar')
 
-const fragment = d.createDocumentFragment()
+sectionCheckout.style.display = "none"; // esto cambia a none
+home.style.display = "none"; //esto se borra
+
+contacto.style.display = "none";
+sectionProductos.style.display = "none";
+sectionAmpliar.style.display = "none";
+sectionCarrito.style.display = "block"; // esto cambia a none 
+
+sectionGracias.style.display = "none";
+
+/* Footer del Carrito */
+const footer = d.getElementById('footer')
+const aceptarCompra = d.getElementById('aceptarCompra')
+
+const btnGracias = d.getElementById('graciasCompra')//????
+
+/*???*/ const fragment = d.createDocumentFragment()
 let carrito = {}
-
+/* let dato = {
+    direccion: null,
+    fecha:null,
+    tarjeta:null
+} */
 let aVelas = [
 	{
         "nombre":       "Night Smoke",
@@ -90,49 +94,48 @@ let aVelas = [
         "id":               5
     }
 ];
-d.addEventListener('DOMContentLoaded', () => { fetchData()
-    if(localStorage.getItem('carrito')){
-        carrito= JSON.parse(localStorage.getItem('carrito'))
-        //pintarCarrito()
-        sectionCarrito()
-        }  
-        if(localStorage.getItem('dato')){
-            dato= JSON.parse(localStorage.getItem('dato'))
-            CheckoutConfirm() 
-        }
-        if(localStorage.getItem('pago')){
-            pago= JSON.parse(localStorage.getItem('pago'))
-            CheckoutConfirm() 
-        }
-    })
-    const fetchData = async () =>  {
-        try {
-            pintarCards(aVelas)
-        } catch {
-            console.log('error')
-        }
-    }
-const sectionHome = () => {
-    home.style.display = 'block'
-    section.style.display = 'none'
-    contacto.style.display = 'none'
 
+/*-------Eventos de los Botones-------*/
+d.addEventListener('DOMContentLoaded', () => { fetchData()
+if(localStorage.getItem('carrito')){
+    carrito= JSON.parse(localStorage.getItem('carrito'))
+    pintarCarrito()
+    }  
+    if(localStorage.getItem('dato')){
+        dato= JSON.parse(localStorage.getItem('dato'))
+        CheckoutConfirm() 
+    }
+    if(localStorage.getItem('pago')){
+        pago= JSON.parse(localStorage.getItem('pago'))
+        CheckoutConfirm() 
+    }
+})
+
+/* Interaciones de Botones */
+cards.addEventListener('click', e => { addCarrito(e) })
+cards.addEventListener('click', e => { addAmpliar(e) })
+ampliar.addEventListener('click', e => { addCarrito(e) })
+items.addEventListener('click', e => { btnAumentarDisminuir(e) })
+/* checkoutDatos.addEventListener('click', e => { addDatos(e) }) 
+checkoutConfirm.addEventListener('click', e => { addDatos(e) }) */
+
+//btnGracias.addEventListener('click', e => { VerGracias(e) })
+// Botones del Menu
+btnHome.addEventListener('click', e => { VerHome(e) })
+btnProductos.addEventListener('click', e => { VerProducto(e) })
+btnContacto.addEventListener('click', e => { VerContacto(e) })
+btnCarrito.addEventListener('click', e => { VerCarrito(e) })
+
+const fetchData = async () =>  {
+    try {
+        pintarCards(aVelas)
+    } catch {
+        console.log('error')
+    }
 }
-// Productos
-const sectionProductos = () => {
-    section.innerHTML = ''
-    let h1 = d.createElement('h1')
-    h1.innerHTML = 'Productos'
-    section.appendChild(h1)
-    let sectionProducto = d.createElement('section')
-    sectionProducto.id = 'cards'
-    sectionProducto.classList = 'pt-4'
-    section.appendChild(sectionProducto)
-    pintarCards(aVelas)
-    
-}
+
+/*--------- Productos ---------*/
 const pintarCards = aVelas => {
-    let cards = d.getElementById('cards')
     aVelas.forEach(producto => {
         //console.log(producto)
         let article = d.createElement('article');
@@ -173,19 +176,15 @@ const pintarCards = aVelas => {
 
         let img = d.createElement('img');
         img.src = producto.imagen;
-        img.alt = 'vela en envase de vidrio'
+        // Falta el alt de la imagen
         div2.appendChild(img);
     })
-    //pintarMinicarrito()
-    cards.addEventListener('click', e => { addCarrito(e) })
-    cards.addEventListener('click', e => { addAmpliar(e) })
-    
 }
 
- addAmpliar = e => {
+/*--------- Ampliar ---------*/
+const addAmpliar = e => {
     if (e.target.classList.contains('btn-outline-dark')) {
         setAmpliar(e.target.parentElement)
-        console.log(e.target.parentElement)
     }
     e.stopPropagation() 
 }
@@ -200,18 +199,19 @@ const setAmpliar = objeto => {
 }
 // Ampliamos el producto seleccionado
 const pintarAmpliar = id => {
-    section.innerHTML = ''
+    ampliar.innerHTML = ""
+    sectionAmpliar.style.display = "block";
+    sectionProductos.style.display = "none";
 
     let div = d.createElement('div')
     div.classList = "card_ampliado"
-    section.appendChild(div)
+    ampliar.appendChild(div)
 
     let div2 = d.createElement('div')
     div.appendChild(div2)
     
     let img = d.createElement('img')
     img.src = aVelas[id].imagen
-    img.alt = 'vela en envase de vidrio'
     div2.appendChild(img)
 
     let div3 = d.createElement('div')
@@ -244,6 +244,7 @@ const pintarAmpliar = id => {
     div3.appendChild(btnAgregar)
 }
 
+/*--------- Carrito ---------*/
 const addCarrito = e => {
     if (e.target.classList.contains('btn-primary')) {
         console.log(e.target.parentElement)
@@ -251,6 +252,7 @@ const addCarrito = e => {
     }
     e.stopPropagation() 
 }
+
 
 const setCarrito = objeto => {
     const producto = {
@@ -262,68 +264,10 @@ const setCarrito = objeto => {
         producto.cantidad = carrito[producto.id].cantidad + 1
     }
     carrito[producto.id] = {...producto}
-    //console.log(producto)
-    pintarMinicarrito()
+    pintarCarrito()
 }
 
-const sectionCarrito = () => {
-    section.innerHTML = ''
-    let div = d.createElement('div')
-    div.classList = 'container'
-    section.appendChild(div)
-        let h1 = d.createElement('h1')
-        h1.innerHTML = 'Carrito de Compras'
-        h1.classList = 'h1 mt-4'
-        div.appendChild(h1)
-
-        let table = d.createElement('table')
-        table.classList = 'table text-center'
-        div.appendChild(table)
-
-            let thead = d.createElement('thead')
-            thead.classList = 'bg-dark text-light'
-            table.appendChild(thead)
-
-                    let tr = d.createElement('tr')
-                    thead.appendChild(tr)
-
-                        let obj = {a: "Id", b: "Imagen", c: "Nombre", d: "Descripcion", e: "Cantidad", f:"Btn", g:"Total"};
-                        for (const prop in obj) {
-                        th = d.createElement('th')
-                        th.innerHTML = `${obj[prop]}`
-                        tr.appendChild(th)
-                        }
-
-            let tbody = d.createElement('tbody')
-            tbody.id= 'items'
-            table.appendChild(tbody)
-
-            let tfoot = d.createElement('tfoot')
-            tfoot.classList = 'borde-BF'
-            table.appendChild(tfoot)
-
-                let tr2 = d.createElement('tr')
-                tr2.id = 'footer'
-                tfoot.appendChild(tr2)
-
-        let div2 = d.createElement('div')
-        div2.classList = 'text-end pe-2'
-        div.appendChild(div2)
-
-            let btnCompra = d.createElement('button')
-            btnCompra.innerHTML = 'Aceptar'
-            btnCompra.className =  'btn btn-success'
-            div2.appendChild(btnCompra)
-
-        btnCompra.addEventListener('click', e => { Checkout(e) })
-
-        
-pintarCarrito()
-pintarFooter()
-}
 const pintarCarrito = () => {
-    let items = d.getElementById('items')
-    //console.log(items)
     items.innerHTML = ''
    Object.values(carrito).forEach(producto => {
         
@@ -340,7 +284,7 @@ const pintarCarrito = () => {
 
        let Img = d.createElement('img')
        Img.src = aVelas[producto.id].imagen
-       Img.alt = 'vela en envase de vidrio'
+       //falta el alt de la imagen
        Img.className = 'table-img'
        thImg.appendChild(Img)
        
@@ -376,14 +320,14 @@ const pintarCarrito = () => {
        thTotal.innerHTML = producto.cantidad * aVelas[producto.id].precio
        tr.appendChild(thTotal)
    })
-   items.addEventListener('click', e => { btnAumentarDisminuir(e) })
-   //pintarFooter()
+   pintarFooter()
    pintarMinicarrito()
-   //btnaceptar()
+   btnaceptar()
 
    localStorage.setItem('carrito', JSON.stringify(carrito))
-   //console.log(carrito)
+   console.log(carrito)
 }
+
 
 const btnAumentarDisminuir = e => {
     //console.log(e.target)
@@ -395,23 +339,21 @@ const btnAumentarDisminuir = e => {
         carrito[e.target.dataset.id] = {...producto}
         pintarCarrito()
     }
-// no funciona el restar
-    /* if(e.target.classList.contains('btn-danger')) {
+
+    if(e.target.classList.contains('btn-danger')) {
         carrito[e.target.dataset.id]
-        console.log(carrito[e.target.dataset.id])
+        //console.log(carrito[e.target.dataset.id])
         const producto = carrito[e.target.dataset.id]
         producto.cantidad--
         if(producto.cantidad === 0) {
             delete carrito[e.target.dataset.id]
         }
-        //console.log(producto.cantidad)
         pintarCarrito()
     }
-    e.stopPropagation() */
+    e.stopPropagation()
 }
 
 const pintarFooter = () => {
-    let footer = d.getElementById('footer')
     footer.innerHTML = ''
     if(Object.keys(carrito).length === 0) {
         footer.innerHTML = `<th>Carrito Vacio</th>`
@@ -420,10 +362,9 @@ const pintarFooter = () => {
     const nCantidad = Object.values(carrito).reduce((acc, {cantidad}) => acc + cantidad, 0)
     const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad * precio, 0)
 
-    let tdProductos = d.createElement('td')
-    tdProductos.classList = 'h5 mx-auto'
-    tdProductos.innerHTML = 'Total Productos'
-    footer.appendChild(tdProductos)
+    let thProductos = d.createElement('th')
+    thProductos.innerHTML = 'Total Productos'
+    footer.appendChild(thProductos)
 
     let td1 = d.createElement('td')
     footer.appendChild(td1)
@@ -441,71 +382,86 @@ const pintarFooter = () => {
 
     let btnVaciar = d.createElement('button')
     btnVaciar.innerHTML = 'Vaciar'
-    btnVaciar.className = 'btn btn-succes btn-sm'
+    btnVaciar.className = 'btn btn-danger btn-sm'
     tdVaciar.appendChild(btnVaciar)
     btnVaciar.addEventListener('click', () => {
         carrito = {}
         pintarCarrito()
-        pintarFooter()
+        //Checkout()// revisar y sacar
+        btnCompra()
     })
 
     let tdTotal = d.createElement('td')
     tdTotal.innerHTML = nPrecio
     footer.appendChild(tdTotal)
+
+
+}
+// Boton Aceptar del carrito de compras.
+const btnaceptar = () => {
+    aceptarCompra.innerHTML = ''
+    if(Object.keys(carrito).length === 0) {
+        aceptarCompra.innerHTML= ``
+        return
+    }
+
+    let btnCompra = d.createElement('button')
+    btnCompra.innerHTML = 'Aceptar'
+    btnCompra.className =  'btn btn-success'
+    aceptarCompra.appendChild(btnCompra)
+    btnCompra.addEventListener('click', e => { VerComprar(e)
+    CheckoutDato()
+    CheckoutConfirm()
+})
 }
 
+/*--------- Mini Carrito ---------*/
 const pintarMinicarrito = () => {
     const nCantidad = Object.values(carrito).reduce((acc, {cantidad}) => acc + cantidad, 0)
     const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad * precio, 0)
 
-    let minicarrito = d.getElementById('minicarrito')
+    let minicarrito= d.getElementById('minicarrito')
     minicarrito.querySelectorAll('span')[0].textContent = nCantidad
     minicarrito.querySelectorAll('span')[1].textContent = "$" + nPrecio
-    
-
 }
 
-const Checkout = () => {
-    section.innerHTML = ''
-    //checkout.innerHTML = ''
-    let div = d.createElement('div')
-    div.classList = 'row contacto border'// averiguar la clase contacto
-    section.appendChild(div)
-
-    let div2 = d.createElement('div')
-    div2.classList = 'col-md-12 col-lg-6 mx-auto pt-2 border  pb-3'
-    div.appendChild(div2)
+/* const Checkout = () => {
+    checkout.innerHTML = ''
+    let divGeneral = d.createElement('div')
+    divGeneral.classList = 'col-md-12 col-lg-6 mx-auto pt-2 border  pb-3'
+    checkout.appendChild(divGeneral)
     
     let span = d.createElement('span')
     span.classList = 'text-secondary d-flex flex-row-reverse'
-    //span.innerHTML = '1 de 2'
-    div2.appendChild(span)
+    span.innerHTML = '2 de 2'
+    divGeneral.appendChild(span)
+
+    let form = d.createElement('form')
+    form.id = 'form'
+    divGeneral.appendChild(form)
+
+    let divConfirm = d.createElement('div')
+    divConfirm.id = 'confirmar'
+    divConfirm.classList = 'col-md-12 col-lg-5 bg-gris pt-4  ps-0'
+    divGeneral.appendChild(divConfirm)
+
+    CheckoutDato()
+    
+} */
+
+const CheckoutDato = () => {
+    checkoutDatos.innerHTML = ''
+
+    let span = d.createElement('span')
+    span.classList = 'text-secondary d-flex flex-row-reverse'
+    span.innerHTML = '1 de 2'
+    checkoutDatos.appendChild(span)
 
     let form = d.createElement('form')
     form.id = 'form'
     //form.action = true
     //form.method = 'POST'
-    div2.appendChild(form)
-
-    let divConfirm = d.createElement('div')
-    divConfirm.id = 'confirmar'
-    divConfirm.classList = 'col-md-12 col-lg-5 bg-gris pt-4  ps-0 '
-    div.appendChild(divConfirm)
-
-    CheckoutDato()
-    // CheckoutPago()
-     CheckoutConfirm()
-    
-}
-
-const CheckoutDato = () => {
-    
-    let form = d.getElementById('form')
-    form.innerHTML = ''
-
-    let span = form.parentElement.firstChild
-    console.log(span)
-    span.innerHTML = '1 de 2'
+    checkoutDatos.appendChild(form)
 
     let div2 = d.createElement('div')
     div2.classList = 'pt-2'
@@ -519,14 +475,14 @@ const CheckoutDato = () => {
     let nombre = d.createElement('label')
         nombre.innerHTML = 'Nombre'
         nombre.classList = 'mt-3 form-label'
-        //for
+        // for
         div2.appendChild(nombre)
     let nombreInp = d.createElement('input')
         nombreInp.classList = ' form-control'
         nombreInp.id = 'nombre'
         nombreInp.type = 'text'
         nombreInp.placeholder = 'Ingrese su Nombre.'
-        //nombreInp.required = true
+        nombreInp.required = true
         div2.appendChild(nombreInp)
     let errNombre = d.createElement('span')
         errNombre.innerHTML = 'El nombre es obligatorio'
@@ -544,7 +500,7 @@ const CheckoutDato = () => {
         emailInp.id = 'email' 
         emailInp.type = 'text'
         emailInp.placeholder = 'Ingrese su Email.'
-        //emailInp.required = true
+        emailInp.required = true
         div2.appendChild(emailInp)
     let errEmail = d.createElement('span')
         errEmail.innerHTML = 'El Email es obligatorio'
@@ -561,7 +517,7 @@ const CheckoutDato = () => {
         telefonoInp.id = 'telefono'
         telefonoInp.type = 'text'
         telefonoInp.placeholder = 'Ingrese su numero de Telefono.'
-        //telefonoInp.required = true
+        telefonoInp.required = true
         div2.appendChild(telefonoInp)
     let errTel = d.createElement('span')
         errTel.innerHTML = 'El Telefono es obligatorio'
@@ -583,7 +539,7 @@ const CheckoutDato = () => {
         direccionInp.id = 'direccion'
         direccionInp.type = 'text'
         direccionInp.placeholder = 'Ingrese su Direccion.'
-        //direccionInp.required = true
+        direccionInp.required = true
         div2.appendChild(direccionInp)
     let errDirecc = d.createElement('span')
         errDirecc.innerHTML = 'La direccion es obligatorio'
@@ -599,7 +555,7 @@ const CheckoutDato = () => {
         fechaInp.classList = 'form-control'
         fechaInp.id = 'fecha'
         fechaInp.type = 'date'
-        //fechaInp.required = true
+        fechaInp.required = true
         div2.appendChild(fechaInp)
     let errFecha = d.createElement('span')
         errFecha.innerHTML = 'La Fecha es obligatoria'
@@ -617,7 +573,7 @@ const CheckoutDato = () => {
         div2.appendChild(divBtn)
 
     let button = d.createElement('button')
-        button.className = 'btn btn-primary'
+        button.className = 'btn btn-success'
         button.innerHTML = 'Siguiente'
         button.type = 'submit'
         divBtn.appendChild(button)
@@ -643,83 +599,150 @@ const CheckoutDato = () => {
                 direccion: direccionInp.value,
                 fecha: fechaInp.value,
             }
-            //console.log(dato)
+            console.log(dato)
             localStorage.setItem('dato', JSON.stringify(dato))
             
-            
-            MetodoPago()
-            //CheckoutConfirm()
+            CheckoutPago()
+            CheckoutConfirm()
             CheckoutSub()
         //}
     })
 }
 
-const MetodoPago = () => {
+
+const CheckoutPago = () => {
 
     let form = d.getElementById('form')
      form.innerHTML = ''
-
-    let span = form.parentElement.firstChild
-    console.log(span)
-    span.innerHTML = '2 de 2'
-    //form.appendChild(span)
-
+    
     let div = d.createElement('div')
-    div.id = 'metodo'
     div.classList = 'pt-2'
     form.appendChild(div)
-
-    let divSeleccion = d.createElement('div')
-    div.appendChild(divSeleccion)
-
 
     let h2 = d.createElement('h2')
     h2.innerHTML = 'Metodos de Pago'
     h2.classList = 'h4 border-bottom border-dark'
-    divSeleccion.appendChild(h2)
+    div.appendChild(h2)
 
+    //Metodo Efectivo
+    
+// DNI
+    let divDni = d.createElement('div')
+        divDni.classList = 'form-group mt-3'
+        div.appendChild(divDni)
+    let dni = d.createElement('label')
+        dni.innerHTML = 'Numero de su DNI' 
+        dni.classList = 'mt-3 form-label'
+        // for
+        divDni.appendChild(dni)
+    let dniInp = d.createElement('input')
+        dniInp.classList = 'form-control'
+        dniInp.id = 'dni'
+        dniInp.type = 'num' //checkear este campo
+        dniInp.placeholder = 'Ingrese su DNI.'
+        dniInp.required = true
+        divDni.appendChild(dniInp)
+    let errDni = d.createElement('span')
+        errDni.innerHTML = 'El nombre es obligatorio'
+        errDni.style.display = 'none'
+        errDni.classList = 'text-danger mt-1 ms-1'
+        divDni.appendChild(errDni)
 
-    let divEfect = d.createElement('div')
-        divEfect.id = 'divEfect'
-        divEfect.classList = 'form-check border p-3 ps-5 mb-2'
-        divSeleccion.appendChild(divEfect)
-    let efectivo = d.createElement('label')
-        efectivo.innerHTML = 'Efectivo'
-        efectivo.classList = 'form-check-label'
-        divEfect.appendChild(efectivo) 
-    let efectInp = d.createElement('input')
-        efectInp.classList = 'form-check-input'
-        efectInp.type = 'radio'
-        efectInp.name = 'radio'
-        divEfect.appendChild(efectInp)
-
-        efectInp.addEventListener('click', e => { 
-            console.log(divEfect)
-            Efectivo()
-            
-        })
-
+// Numero de Tarjeta
     let divTarj = d.createElement('div')
-        divTarj.id = 'divTarj'
-        divTarj.classList = 'form-check border p-3 ps-5 mt-2'
-        divSeleccion.appendChild(divTarj)
+        divTarj.classList = 'form-group mb-3'
+        div.appendChild(divTarj)
     let tarjeta = d.createElement('label')
-        tarjeta.innerHTML = 'Tarjeta'
-        tarjeta.classList = 'form-check-label'
+        tarjeta.innerHTML = 'Numero de la Tarjeta'
+        tarjeta.classList = 'mt-3 form-label'
+        // for
         divTarj.appendChild(tarjeta)
     let tarjetaInp = d.createElement('input')
-        tarjetaInp.classList = 'form-check-input'
-        tarjetaInp.type = 'radio'
-        tarjetaInp.name = 'radio'
+        tarjetaInp.classList = 'form-control'
+        tarjetaInp.id = 'tarjeta'
+        tarjetaInp.type = 'num' // revisar este cararcter
+        tarjetaInp.placeholder = 'Ingrese el numero de la tarjeta.'
+        dniInp.required = true
         divTarj.appendChild(tarjetaInp)
-    
-        tarjetaInp.addEventListener('click', e => { 
-            Tarjeta()
-        })
-    let datoTarjeta = d.createElement('div')
-        divSeleccion.appendChild(datoTarjeta)
+    let errtarj = d.createElement('span')
+        errtarj.innerHTML = 'El numero de la tarjeta es obligatorio'
+        errtarj.style.display = 'none'
+        errtarj.classList = 'text-danger mt-1 ms-1'
+        divTarj.appendChild(errtarj)
+
+// codigo de seguridad
+        let divseguri = d.createElement('div')
+        divseguri.classList = 'form-group mt-3'
+        div.appendChild(divseguri)
+    let seguridad = d.createElement('label')
+        seguridad.innerHTML = 'ingrese los 3 numeros al reverso de su tarjeta' 
+        seguridad.classList = 'mt-3 form-label'
+        // for
+        divseguri.appendChild(dni)
+    let seguriInp = d.createElement('input')
+        seguriInp.classList = 'form-control'
+        seguriInp.id = 'dni'
+        seguriInp.type = 'num' //checkear este campo
+        seguriInp.placeholder = 'Ingreseel codigo de seguridad'
+        seguriInp.required = true
+        divseguri.appendChild(seguriInp)
+    let errSegu = d.createElement('span')
+        errSegu.innerHTML = 'El codigo de seguridad es obligatorio'
+        errSegu.style.display = 'none'
+        errSegu.classList = 'text-danger mt-1 ms-1'
+        divseguri.appendChild(errSegu)
 
 
+// fecha de vencimiento
+    let divVenc = d.createElement('div')
+        divVenc.classList = 'form-group mt-3'
+        div.appendChild(divVenc)
+    let vencimiento = d.createElement('label')
+        vencimiento.innerHTML = 'ingrese la fecha de vencimiento de su tarjeta' 
+        vencimiento.classList = 'mt-3 form-label'
+        // for
+        divVenc.appendChild(vencimiento)
+    let vencInp = d.createElement('input')
+        vencInp.classList = 'form-control'
+        vencInp.id = 'dni'
+        vencInp.type = 'date' //checkear este campo
+        vencInp.placeholder = 'Ingreseel la fecha de Vencimiento'
+        vencInp.required = true
+        divVenc.appendChild(vencInp)
+    let errVenc = d.createElement('span')
+        errVenc.innerHTML = 'El Vencimiento de la tarjeta es obligatorio'
+        errVenc.style.display = 'none'
+        errVenc.classList = 'text-danger mt-1 ms-1'
+        divVenc.appendChild(errVenc)
+// cuotas
+    let divCuotas = d.createElement('div')
+        divCuotas.classList = 'form-group mt-3'
+        div.appendChild(divCuotas)
+    let cuotas = d.createElement('label')
+        cuotas.innerHTML = 'ingrese la cantidad de cuotas' 
+        cuotas.classList = 'mt-3 form-label'
+        // for
+        divCuotas.appendChild(cuotas)
+    let cuotasSelec = d.createElement('select')
+        cuotasSelec.classList = 'form-select'
+        cuotasSelec.id = 'dni'
+        cuotasSelec.type = 'num' //checkear este campo
+        //cuotasInp.placeholder = 'Ingrese la cantidad de cuotas'
+        cuotasSelec.required = true
+        divCuotas.appendChild(cuotasSelec)    
+            for (i=1; i<7; i++){
+                let cuota = i
+                if(i == 1){
+                    cuota +=' Cuota'
+                } else {
+                    cuota +=' Cuotas'
+                }
+                let options = d.createElement('option')
+                options.innerHTML = cuota
+                cuotasSelec.appendChild(options)
+            }
+
+// Botones
     let divBtn = d.createElement('div')
         divBtn.classList = 'text-end mt-3'
         div.appendChild(divBtn)
@@ -728,193 +751,48 @@ const MetodoPago = () => {
             cancelar.className = 'btn btn-danger'
             cancelar.innerHTML = 'Cancelar'
             divBtn.appendChild(cancelar)
-    
-            cancelar.addEventListener('click', e => { 
-                CheckoutDato()
-            })
 
-            let siguiente = d.createElement('button')
-            siguiente.className = 'btn btn-primary'
+        let siguiente = d.createElement('button')
+            siguiente.className = 'btn btn-success'
             siguiente.innerHTML = 'Siguiente'
             divBtn.appendChild(siguiente)
-}
 
-const Efectivo = () => {
-let div = d.getElementById('metodo')
-//let divBtn = div.lastChild
-//let siguiente = divBtn.lastChild
-let siguiente = div.lastChild.lastChild
-
-let datoTarjeta = div.firstChild.lastChild
-datoTarjeta.innerHTML = ''
-   
-    siguiente.addEventListener('click', e => { 
-        pago = {
-        tarjeta: 'Efectivo',
-    }
-    localStorage.setItem('pago', JSON.stringify(pago))
-
-    CheckoutConfirm()
-    CheckoutSub()
+    cancelar.addEventListener('click', e => { 
+        CheckoutDato()
     })
- 
-}
 
-const Tarjeta = () => {
-
-let div = d.getElementById('metodo')
-let divBtn = div.lastChild
-//console.log(div.firstChild)
-//let divSeleccion = div.firstChild
-let siguiente = divBtn.lastChild
-
-//let datoTarjeta = divSeleccion.lastChild
-let datoTarjeta = div.firstChild.lastChild
-datoTarjeta.innerHTML = ''
-
-let divDni = d.createElement('div')
-    divDni.classList = 'form-group mt-3'
-    datoTarjeta.appendChild(divDni)
-let documento = d.createElement('label')
-    documento.innerHTML = 'Numero de su DNI' 
-    documento.classList = 'mt-3 form-label'
-    // for
-    divDni.appendChild(documento)
-let dniInp = d.createElement('input')
-    dniInp.classList = 'form-control'
-    dniInp.id = 'dni'
-    dniInp.type = 'num' //checkear este campo
-    dniInp.placeholder = 'Ingrese su DNI.'
-    //dniInp.required = true
-    divDni.appendChild(dniInp)
-let errDni = d.createElement('span')
-    errDni.innerHTML = 'El DNI es obligatorio'
-    errDni.style.display = 'none'
-    errDni.classList = 'text-danger mt-1 ms-1'
-    divDni.appendChild(errDni)
-
-let divNumTarj = d.createElement('div')
-    divNumTarj.classList = 'form-group mb-3'
-    datoTarjeta.appendChild(divNumTarj)
-let tarjeta = d.createElement('label')
-    tarjeta.innerHTML = 'Ingrese el numero de la tarjeta.'
-    tarjeta.classList = 'mt-3 form-label'
-    // for
-    divNumTarj.appendChild(tarjeta)
-let tarjetaInp = d.createElement('input')
-    tarjetaInp.classList = 'form-control'
-    tarjetaInp.id = 'tarjeta'
-    tarjetaInp.type = 'num' // revisar este cararcter
-    tarjetaInp.placeholder = 'Ej: xxxx xxxx xxxx xxxx'
-    //tarjetaInp.required = true
-    divNumTarj.appendChild(tarjetaInp)
-let errtarj = d.createElement('span')
-    errtarj.innerHTML = 'El numero de la tarjeta es obligatorio'
-    errtarj.style.display = 'none'
-    errtarj.classList = 'text-danger mt-1 ms-1'
-    datoTarjeta.appendChild(errtarj)
-
-let divseguri = d.createElement('div')
-    divseguri.classList = 'form-group mt-3'
-    datoTarjeta.appendChild(divseguri)
-let seguridad = d.createElement('label')
-    seguridad.innerHTML = 'ingrese los 3 numeros al reverso de su tarjeta' 
-    seguridad.classList = 'mt-3 form-label'
-    // for
-    divseguri.appendChild(seguridad)
-let seguriInp = d.createElement('input')
-    seguriInp.classList = 'form-control'
-    seguriInp.id = 'seguridad'
-    seguriInp.type = 'num' //checkear este campo
-    seguriInp.placeholder = 'Ej: 349'
-    //seguriInp.required = true
-    divseguri.appendChild(seguriInp)
-let errSegu = d.createElement('span')
-    errSegu.innerHTML = 'El codigo de seguridad es obligatorio'
-    errSegu.style.display = 'none'
-    errSegu.classList = 'text-danger mt-1 ms-1'
-    divseguri.appendChild(errSegu)
-
-// fecha de vencimiento
-let divVenc = d.createElement('div')
-    divVenc.classList = 'form-group mt-3'
-    datoTarjeta.appendChild(divVenc)
-let vencimiento = d.createElement('label')
-    vencimiento.innerHTML = 'ingrese la fecha de vencimiento de su tarjeta' 
-    vencimiento.classList = 'mt-3 form-label'
-    // for
-    divVenc.appendChild(vencimiento)
-let vencInp = d.createElement('input')
-    vencInp.classList = 'form-control'
-    vencInp.id = 'vencimiento'
-    vencInp.type = 'date' //checkear este campo
-    //vencInp.required = true
-    divVenc.appendChild(vencInp)
-let errVenc = d.createElement('span')
-    errVenc.innerHTML = 'El Vencimiento de la tarjeta es obligatorio'
-    errVenc.style.display = 'none'
-    errVenc.classList = 'text-danger mt-1 ms-1'
-    divVenc.appendChild(errVenc)
-    // cuotas
-let divCuotas = d.createElement('div')
-    divCuotas.classList = 'form-group mt-3'
-    datoTarjeta.appendChild(divCuotas)
-let cuotas = d.createElement('label')
-    cuotas.innerHTML = 'ingrese la cantidad de cuotas' 
-    cuotas.classList = 'mt-3 form-label'
-    // for
-    divCuotas.appendChild(cuotas)
-let cuotasSelec = d.createElement('select')
-    cuotasSelec.classList = 'form-select'
-    cuotasSelec.id = 'cuotas'
-    cuotasSelec.type = 'num' //checkear este campo
-    //cuotasInp.placeholder = 'Ingrese la cantidad de cuotas'
-    //cuotasSelec.required = true
-    divCuotas.appendChild(cuotasSelec)    
-    for (i=1; i<7; i++){
-        let cuota = i
-        if(i == 1){
-            cuota +=' Cuota'
+    siguiente.addEventListener('click', e => { 
+         if (dniInp.value.length == 0 ){
+                errDni.style.display = 'block'
+                dniInp.classList ='form-control border-danger'
+        }if (tarjetaInp.value.length == 0 ){
+            errtarj.style.display = 'block'
+            tarjetaInp.classList ='form-control border-danger'
+        }if (seguriInp.value.length == 0 ){
+            errSegu.style.display = 'block'
+            seguriInp.classList ='form-control border-danger'
+        }if (vencInp.value.length == 0 ){
+            errVenc.style.display = 'block'
+            vencInp.classList ='form-control border-danger'
         } else {
-            cuota +=' Cuotas'
-        }
-        let options = d.createElement('option')
-        options.innerHTML = cuota
-        cuotasSelec.appendChild(options)
-    }
-   
-    siguiente.addEventListener('click', e => { 
-    /* if (dniInp.value.length == 0 ){
-            errDni.style.display = 'block'
-            dniInp.classList ='form-control border-danger'
-    }if (tarjetaInp.value.length == 0 ){
-        errtarj.style.display = 'block'
-        tarjetaInp.classList ='form-control border-danger'
-    }if (seguriInp.value.length == 0 ){
-        errSegu.style.display = 'block'
-        seguriInp.classList ='form-control border-danger'
-    }if (vencInp.value.length == 0 ){
-        errVenc.style.display = 'block'
-        vencInp.classList ='form-control border-danger'
-    } else { */
         pago = {
-        tarjeta: tarjetaInp.value,
-        //fecha: inputTarj.value
-    }
-    //console.log(pago)
-    localStorage.setItem('pago', JSON.stringify(pago))
-
-    
-    CheckoutConfirm()
-    CheckoutSub()
-    //}
-    })
+           tarjeta: tarjetaInp.value,
+           //fecha: inputTarj.value
+       }
+       //console.log(pago)
+       localStorage.setItem('pago', JSON.stringify(pago))
+       
+       CheckoutPago()
+       CheckoutConfirm()
+       CheckoutSub()
+       }
+       
+   })
 
 }
 
 const CheckoutConfirm = () => {  
-    let checkoutConfirm = d.getElementById('confirmar')
-    
+     
      checkoutConfirm.innerHTML = ''
 
         let h2 = d.createElement('h2')
@@ -938,7 +816,6 @@ const CheckoutConfirm = () => {
 
                 let img = d.createElement('img')
                 img.src = aVelas[producto.id].imagen
-                img.alt = 'vela en envase de vidrio'
                 img.style.setProperty("max-width", "50px")
                 liI.appendChild(img)
 
@@ -953,7 +830,7 @@ const CheckoutConfirm = () => {
             ul.appendChild(liC)
             
             let liT = d.createElement('li') 
-            liT.innerHTML = producto.cantidad * aVelas[producto.id].precio
+            liT.innerHTML =producto.cantidad * aVelas[producto.id].precio
             liT.classList = 'd-inline col-3  mx-auto pb-1'
             ul.appendChild(liT)
         })
@@ -962,11 +839,11 @@ const CheckoutConfirm = () => {
         //console.log(nPrecio)
 
         let divFoot = d.createElement('div')
-        divFoot.classList = 'container pb-3 '
+        divFoot.classList = 'container  border-top bottom-0  pb-3'
         checkoutConfirm.appendChild(divFoot)
 
         let ul = d.createElement('ul')
-        ul.classList = 'row ps-1 '
+        ul.classList = 'row ps-1'
         ul.id = 'subdatos'
         divFoot.appendChild(ul)
 
@@ -977,7 +854,7 @@ const CheckoutConfirm = () => {
             ul.appendChild(subtotal)
 
             let subtotalDato = d.createElement('li')
-            subtotalDato.innerHTML = '$ ' + nPrecio
+            subtotalDato.innerHTML = nPrecio
             subtotalDato.classList = 'd-inline col-6 text-end pb-1'
             ul.appendChild(subtotalDato)
 
@@ -997,7 +874,7 @@ const CheckoutConfirm = () => {
             ul.appendChild(total)
 
             let totalDato = d.createElement('li')
-            totalDato.innerHTML = '$ ' + (nPrecio + 600)
+            totalDato.innerHTML = nPrecio + 600
             totalDato.classList = 'd-inline col-6 h4 text-end pb-1'
             ul.appendChild(totalDato)
 
@@ -1005,42 +882,41 @@ const CheckoutConfirm = () => {
         divBtn.classList = 'text-end'
         divFoot.appendChild(divBtn)
 
-        /* let cancelar = d.createElement('button')
+        let cancelar = d.createElement('button')
         cancelar.className = 'btn btn-danger'
         cancelar.innerHTML = 'Cancelar'
         divBtn.appendChild(cancelar)
         cancelar.addEventListener('click', e => { 
-            sectionProductos()
+            
         })
 
         let aceptar = d.createElement('button')
         aceptar.className = 'btn btn-success'
         aceptar.innerHTML = 'Aceptar'
         divBtn.appendChild(aceptar)
-
-        aceptar.addEventListener('click', e => { 
-            carrito = {}
-            seccionExito()
-            pintarMinicarrito()
-        }) */
         
 }
 
 const CheckoutSub = () => {
+    if(localStorage.getItem('dato') ){
+        dato= JSON.parse(localStorage.getItem('dato'))
+        
+    }
+    if(localStorage.getItem('pago') ){
+        pago= JSON.parse(localStorage.getItem('pago'))
+    }  
+    //console.log(dato)
 
     let ul = d.getElementById('subdatos')
     let subtotal = d.getElementById('subtotal')
-    let divBtn =  ul.parentElement.lastChild
     
-    if(localStorage.getItem('dato') ){
-        dato = JSON.parse(localStorage.getItem('dato'))
-        
-        let direc = d.createElement('li')
+    let direc = d.createElement('li')
         direc.innerHTML= 'Direccion'
         direc.classList = 'd-inline col-6 h6 text-secondary pb-1'
         ul.insertBefore(direc, subtotal)
     let direcDato = d.createElement('li')
         direcDato.innerHTML = dato.direccion
+        //direcDato.innerHTML = 'direccion'
         direcDato.classList = 'd-inline col-6 h6 text-end text-secondary pb-1'
         ul.insertBefore(direcDato, subtotal)
 
@@ -1050,86 +926,97 @@ const CheckoutSub = () => {
         ul.insertBefore(entrega, subtotal)
     let entregaDato = d.createElement('li')
         entregaDato.innerHTML= dato.fecha
+        //entregaDato.innerHTML= 'fecha'
         entregaDato.classList = 'd-inline col-6 text-end text-secondary pb-1'
         ul.insertBefore(entregaDato, subtotal)
-    }
-
-    if(localStorage.getItem('pago') ){
-        pago = JSON.parse(localStorage.getItem('pago'))
-
-        let metodo = d.createElement('li')
+    
+    let metodo = d.createElement('li')
         metodo.innerHTML= 'Metodo de pago:'
         metodo.classList = 'd-inline col-6 h6 text-secondary pb-1'
         //ul.appendChild(metodo)
         ul.insertBefore(metodo, subtotal)
 
+    
     let pagoDato = d.createElement('li')
         //pagoDato.innerHTML = 'Visa 1234 en 6 Cuotas'
         pagoDato.innerHTML = pago.tarjeta
         pagoDato.classList = 'd-inline col-6 text-end text-secondary pb-1'
         //ul.appendChild(pagoDato)
         ul.insertBefore(pagoDato, subtotal)
+}
 
-        let cancelar = d.createElement('button')
-            cancelar.className = 'btn btn-danger'
-            cancelar.innerHTML = 'Cancelar'
-            divBtn.appendChild(cancelar)
-            cancelar.addEventListener('click', e => { 
-                sectionProductos()
-            })
+// Botones para ver las secciones del HTMl.
+const VerCarrito = e => {
+    if(e.target.classList.contains('btn-link')) {
+            sectionCarrito.style.display = "block";
+            home.style.display = "none";
+            contacto.style.display = "none";
+            sectionProductos.style.display = "none";
+            sectionCheckout.style.display = "none";
+            sectionGracias.style.display = "none";
+            sectionAmpliar.style.display = "none";
+    }
+}
+const VerProducto = e => {
+    if(e.target.classList.contains('nav-link')) {
+            sectionProductos.style.display = "block";
+            home.style.display = "none";
+            contacto.style.display = "none";
+            sectionCarrito.style.display = "none";
+            sectionCheckout.style.display = "none";
+            sectionGracias.style.display = "none";
+            sectionAmpliar.style.display = "none";
+    }
+}
+const VerComprar = e => {
+    if(e.target.classList.contains('btn-success')) {
+            sectionCheckout.style.display = "block";
+            home.style.display = "none";
+            contacto.style.display = "none";
+            sectionProductos.style.display = "none";
+            sectionCarrito.style.display = "none";
+            sectionGracias.style.display = "none";
+            sectionAmpliar.style.display = "none";
+    }
+}
+const VerGracias = e => {
+    if(e.target.classList.contains('btn')) {
+        sectionGracias.style.display = "block";
+        home.style.display = "none";
+        contacto.style.display = "none";
+        sectionProductos.style.display = "none";
+        sectionCarrito.style.display = "none";
+        sectionCheckout.style.display = "none";
+        sectionAmpliar.style.display = "none";
 
-            let aceptar = d.createElement('button')
-            aceptar.className = 'btn btn-success'
-            aceptar.innerHTML = 'Aceptar'
-            divBtn.appendChild(aceptar)
-
-            aceptar.addEventListener('click', e => { 
-                carrito = {}
-                seccionExito()
-                pintarMinicarrito()
-            })
+    }
+}
+const VerHome = e => {
+    if(e.target.classList.contains('nav-link')) {
+        home.style.display = "block";
+        contacto.style.display = "none";
+        sectionProductos.style.display = "none";
+        sectionCarrito.style.display = "none";
+        sectionCheckout.style.display = "none";
+        sectionGracias.style.display = "none";
+        sectionAmpliar.style.display = "none";
+        
     }
 }
 
-seccionExito = () => {
-section.innerHTML = ''
-
-let div = d.createElement('div')
-    div.classList = 'text-center m-3 p-3'
-    section.appendChild(div)
-
-    let img = d.createElement('img')
-    img.src = 'img/icons/cheque.png'
-    img.alt = 'Checkout'
-    img.classList = 'p-2'
-    div.appendChild(img)
-    // Alt
-
-let h2 = d.createElement('h2')
-    h2.innerHTML = '¡Todo Listo!'
-    div.appendChild(h2)
-
-let p = d.createElement('p')
-    p.innerHTML = 'Tu compra se realizó con Exito.'
-    p.classList = 'text-secondary'
-    div.appendChild(p)
-
-let btnHome = d.createElement('button')
-    btnHome.classList = 'btn btn-primary'
-    btnHome.innerHTML = 'Volver al Home.' 
-    div.appendChild(btnHome)
-    btnHome.addEventListener('click', e => { 
-        sectionHome()
-    })
-
-let btnSeguir = d.createElement('button')
-    btnSeguir.classList = 'btn btn-success'
-    btnSeguir.innerHTML = 'Seguir Comprando' 
-    div.appendChild(btnSeguir)
-    btnSeguir.addEventListener('click', e => { 
-        sectionProductos()
-    })
-
-
+const VerContacto = e => {
+    if(e.target.classList.contains('nav-link')) {
+        contacto.style.display = "block";
+        home.style.display = "none";
+        sectionProductos.style.display = "none";
+        sectionCarrito.style.display = "none";
+        sectionCheckout.style.display = "none";
+        sectionGracias.style.display = "none";
+        sectionAmpliar.style.display = "none";
+        
+    }
 }
+
+
+
 

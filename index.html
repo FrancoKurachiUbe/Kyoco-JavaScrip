@@ -35,7 +35,8 @@
         </nav>
 </header>
 
-<main>    
+<main>
+   
     <!-- <picture>
         <source media="(max-width: 800px)" srcset="img/Banner_productos_mobile2.jpg" >
         <source media="(max-width: 1000px)" srcset="img/Banner_productos_mobile.jpg" >
@@ -78,11 +79,11 @@
             </div>
         </div>
     </div>
-    
-    <div id="contacto" class="pt-4">
-        <h1 class="pt-4 pb-4">Contacto</h1>
-        <div class="container contacto">
-        <p class="h3 mb-3">Si queres realizar un pedido por mayor o tener mas novedades de nuestros productos, no dudes en escribirnos.</p>
+    <div id="contacto">
+        <h1 class="mt-5 mb-5">Contacto</h1>
+        
+        <div class="container contacto shadow-lg">
+        <p class="h5 mb-3 container">Si quieres realizar un pedido por mayor o tener más novedades de nuestros productos, no dudes en escribirnos.</p>
           <form>
               <div class="form-group mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
@@ -100,181 +101,8 @@
           </form>
         </div>
     </div>
-    <div id="sectionProductos" class="pt-4">
-        <h1 class="pt-4">Velas</h1>
-        <section id="cards" class="pt-4"></section>
-    </div>
-
-    <section id="sectionCarrito">
-        <div class="container">
-            <h1 class="h1 mt-4">Carrito de Compras</h1>
-            <table class="table text-center">
-                <thead class="bg-dark text-light">
-                    <tr>
-                        <th>ID</th>
-                        <th>Imagen</th>
-                        <th>Nombre</th>
-                        <th>Descripcion</th>
-                        <th>Cantidad</th>
-                        <th>Btn</th>
-                        <th>Total</th>
-                    </tr>
-                </thead>
-                <tbody id="items">
-                    
-                </tbody>
-                <tfoot class="borde-BF">
-                    <tr id="footer">
-                        <!-- <th>Carrito Vacio</th> -->
-                    </tr>
-                </tfoot>
-            </table>
-            <div id="aceptarCompra"></div>
-            <!-- <button id="productoComprar" class="btn btn-success">Aceptar</button> -->
-        </div> 
-    </section>
-
-    <section id="sectionCheckout" class="container-fluid">
-        <div class="row contacto border " id="checkout">
-            <div class=" col-md-12 col-lg-6 mx-auto pt-2 border pb-3" id="checkoutDatos">
-                <!--<span class=" text-secondary d-flex flex-row-reverse">1 de 2</span>
-                <form action="">
-                <div class="pt-2"> 
-                        <h2 class="h4 border-bottom border-dark ps-3">Datos Personales</h2>
-                        <label for="nombre" class="form-label">Nombre</label>
-                        <input type="text" class="mb-3 form-control" id="nombre" placeholder="Ingrese su Nombre">
-                        
-                        <label for="mail" class="form-label">Email</label>
-                        <input type="email" class="mb-3 form-control" id="mail"  placeholder="email...">
-
-                        <label for="mail" class="form-label">Telefono</label>
-                        <input type="email" class="mb-3 form-control" id="telefono"  placeholder="Telefono...">
-                   
-                        <h2 class="h4 border-bottom border-dark ps-3">Envio</h2>
-                        <label for="direccion" class="form-label">Direccion</label>
-                        <input type="text" class="mb-3 form-control" id="direccion"  placeholder="direccion...">
-
-                        <label for="fechaEntrega" class="form-label">Fecha de entrega</label>
-                        <input type="date" class="mb-3 form-control" id="fechaEntrega"  placeholder="fechaEntrega...">
-                        <p>Costo de Envio $600</p>
-                        <div style="text-align: right;">
-                            <button class="btn btn-success ">Siguiente</button>
-                        </div>
-                    </div>
-                    
-                    <div class="d-none"> 
-                        <h2 class="h4 border-bottom border-dark">Metodos de Pago</h2>
-                        <div class="form-check py-3 rounded bg-light mt-3">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault2">
-                            <label class="form-check-label" for="flexRadioDefault2">
-                            Efectivo
-                            </label>
-                        </div>
-                        <div class="form-check py-3 rounded bg-light mt-3">
-                            <input class="form-check-input" type="radio" name="flexRadioDefault" id="flexRadioDefault1">
-                            <label class="form-check-label" for="flexRadioDefault1">
-                            Tarjeta
-                            </label>
-                        </div>
-                        
-                        <div class="row mt-3">
-                            <div class="form-group mb-3">
-                                <label for="dni" class="form-label">DNI</label>
-                                <input type="text" class="mb-3 form-control" id="dni" placeholder="Ingrese el DNI.">
-                            </div>
-                            <div class="form-group mb-3">
-                                <label for="numerotarjeta" class="form-label">Numero de la Tarjeta</label>
-                                <input type="text" class="mb-3 form-control" id="numerotarjeta" placeholder="Ingrese el Numero como figura en la tarjeta.">
-                            </div>
-                            <div class="col-auto form-group mb-3">
-                                <label for="codigo" class="form-label">Codigo de Seguridad</label>
-                                <input type="text" class="mb-3 form-control" id="codigo" placeholder="Ingrese el Codigo de Seguridad del reverso de la tarjeta.">
-                            </div>
-                            <div class="col-auto form-group mb-3">
-                                <label for="fecha" class="form-label">Fecha de Vencimiento</label>
-                                <input type="text" class="mb-3 form-control" id="fecha" placeholder="Ingrese la fecha de Vencimiento de la tarjeta.">
-                            </div>
-                            <div class="col-auto form-group mb-3">
-                                <label for="fecha" class="form-label">Cuotas</label>
-                                <select class="form-select ">
-                                    <option selected>De 1 a 12</option>
-                                    <option value="1">1 Cuota</option>
-                                    <option value="2">3 Cuotas</option>
-                                    <option value="3">6 Cuotas</option>
-                                    <option value="4">12 Cuotas</option>
-                                  </select>
-                            </div>
-                        </div>
-                        <div class="text-end">
-                            <button class="btn btn-success ">Siguiente</button>
-                        </div>
-                    </div>
-                </form>-->
-            </div>
-
-            <div class=" col-md-12 col-lg-5 bg-gris pt-4  ps-0" id="checkoutConfirm">
-                <!-- <h2 class="h4 ps-3">Productos:</h2>  
-                <div class="checkout container mt-4 mb-4"> 
-                    <ul class="row text-center ps-1 border-white align-items-center">
-                        <li class="d-inline col-3 mx-auto pb-1"><img style="max-width
-                            : 50px;" src="img/producto/NightSmoke.jpg" alt=""></li>
-                        <li class="d-inline col-3  mx-auto pb-1">Hologram</li>
-                        <li class="d-inline col-3  mx-auto pb-1">1</li>
-                        <li class="d-inline col-3 mx-auto pb-1">$4000</li>
-                    </ul>
-                    <ul class="row text-center ps-1 border-white align-items-center">
-                        <li class="d-inline col-3 mx-auto pb-1"><img style="max-width
-                            : 50px;" src="img/producto/StarsWills.jpg" alt=""></li>
-                        <li class="d-inline col-3  mx-auto pb-1">Hologram</li>
-                        <li class="d-inline col-3  mx-auto pb-1">1</li>
-                        <li class="d-inline col-3 mx-auto pb-1">$3000</li>
-                    </ul>
-                    <ul class="row text-center ps-1 border-white align-items-center">
-                        <li class="d-inline col-3 mx-auto pb-1"><img style="max-width
-                            : 50px;" src="img/producto/Aura.jpg" alt=""></li>
-                        <li class="d-inline col-3  mx-auto pb-1">Hologram</li>
-                        <li class="d-inline col-3  mx-auto pb-1">1</li>
-                        <li class="d-inline col-3 mx-auto pb-1">$2500</li>
-                    </ul>
-                    <ul class="row text-center ps-1 border-white align-items-center">
-                        <li class="d-inline col-3 mx-auto pb-1"><img style="max-width
-                            : 50px;" src="img/producto/Hologram.jpg" alt=""></li>
-                        <li class="d-inline col-3  mx-auto pb-1">Hologram</li>
-                        <li class="d-inline col-3  mx-auto pb-1">2</li>
-                        <li class="d-inline col-3 mx-auto pb-1">$6000</li>
-                    </ul>
-                </div>
-                <div class="container  border-top bottom-0  pb-3">
-                    <ul class="row ps-1">
-                        <li class="d-inline col-6 h6 text-secondary pb-1">Direccion: </li>
-                        <li class="d-inline col-6 h6 text-end text-secondary pb-1">Calle Falsa 123 </li>
-                        <li class="d-inline col-6 h6 text-secondary pb-1">Fecha de Entrega </li>
-                        <li class="d-inline col-6 text-end text-secondary pb-1">xx/xx/xxxx</li>
-                        <li class="d-inline col-6 h6 text-secondary pb-1">Metodo de Pago </li>
-                        <li class="d-inline col-6 text-end text-secondary pb-1">Visa 1234 en 6 Cuotas</li>
-                        <li class="d-inline col-6 pb-1 h6 text-secondary">Subtotal:</li>
-                        <li class="d-inline col-6 text-end pb-1">$15000</li>
-                        <li class="d-inline col-6 h6 text-secondary pb-1">Envio</li>
-                        <li class="d-inline col-6 text-end pb-1">$600</li>
-                        <li class="d-inline col-6 h5 pb-1 ">Total</li>
-                        <li class="d-inline col-6 h4 text-end pb-1">$15600</li>
-                    </ul>
-                    <div class="text-end">
-                        <button class="btn btn-success "> Aceptar</button>
-                    </div>
-                    
-                </div> -->
-            </div>
-        </div>
-    </section>
+    <div id="section"></div>
     
-    <section id="sectionGracias">
-        <h1>Gracias por tu Compra!</h1>
-    </section>
-
-    <section id="sectionAmpliar">
-        <div id="ampliar"></div>
-    </section>
 </main>
 
 <footer class="pb-1 pt-1">
