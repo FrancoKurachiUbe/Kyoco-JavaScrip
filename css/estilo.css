@@ -10,10 +10,10 @@
 .bg-ff {    background: #cc9966;
 }
 
-.bg-BF {    background: #BF7128;
-}
+
 .bg-gris {  background-color: #E6DFDC;
 }
+
 .border-white {
     border-bottom: 1px white solid;
     border-top: 1px white solid;
@@ -89,7 +89,6 @@ h1 {    font-size: 4em;
     background: #BF7128;
     color: white;
     height: 40px;
-    /* width: 80px; */
     text-align: center;
     padding: .5em;
     border-radius:10px;
@@ -137,11 +136,9 @@ h1 {    font-size: 4em;
 }
 
 .cards {    border-radius: 20px;
-            /* box-shadow: 3px 3px 10px black, -3px -3px 10px black; */
             margin: 1em;
             padding-bottom: 1.5em;
             text-align: center;
-            /* align-cards: center; */
             display: flex;
             width: 320px;
             flex-wrap: wrap;
@@ -156,12 +153,7 @@ h1 {    font-size: 4em;
 .cards-detalle h2 { margin-top: .5em;
 
 }
-/* .cards-detalle a  {
-                margin-left: .5em;
-} */
-/* .dere {
-    margin-left: .5em;
-} */
+
 button:last-child {
     margin-left: .5em;
 }
@@ -173,124 +165,20 @@ button:last-child {
 .cards p span {     font-weight: bold;
 }
 
-/* .butt {     
-            width: 150px;
-            height: 3em;
-            border-radius: 10px;
-            vertical-align: top;
-} */
-
-/* .agregar:hover {    background-color: #cccccc;
-}
-
-.ampliar {      background-color: black;
-                color: white;
-}
-.ampliar2 {     padding-top: .7em; 
-}
-
-.ampliar:hover {    background-color: #333333;
-                    color: white;
-} */
 
 /*
 ---------------------------------------------------------------------------------------------------------------------
     -    -    -    -    -    -    -    -    -    -Ampliar-Producto-    -    -    -    -    -    -    -    -    -    
 ---------------------------------------------------------------------------------------------------------------------
 */
-/* .card_detalle {
-    border-radius: 20px;
-    box-shadow: 3px 3px 10px black, -3px -3px 10px black;
-    margin: auto;
-    margin-top: 3em;
-} */
+
 .card_ampliado {
-    border-radius: 20px;
-    box-shadow: 3px 3px 10px black, -3px -3px 10px black;
     margin: auto;
     margin-top: 3em;
 }
 
-/*
----------------------------------------------------------------------------------------------------------------------
-    -    -    -    -    -    -    -    -    -    -VentanaModal-    -    -    -    -    -    -    -    -    -    -    -
----------------------------------------------------------------------------------------------------------------------
-*/
 
-/*
-Esto se utiliza en js para hacer con el boton-ampliar la amplicacion del producto
-*/
 
-.modal-agregar {    position: fixed; z-index: 1;
-                    display: flex; flex-direction: column;
-                    justify-content: center; align-cards: center;
-                    top: 0;
-                    left: 0;
-                    bottom: 0;
-                    right: 0;
-                    background-color: rgba(0,0,0,.9);
-}
-
-.modal-agregar > a {    position: fixed;
-                        z-index: 1;
-                        display: flex;
-                        flex-direction: column;
-                        justify-content: center;
-                        align-cards: center;
-                        top: 1em;
-                        right: 1em;
-                        border: white 1px solid;
-                        border-radius: 5px;
-                        color: white !important;
-                        width: 2.5em;
-                        height: 2em;
-                        text-decoration: none;
-                        cursor: pointer;
-}
-
-.modal-agregar > a:hover {  background-color: red;    
-                            color: white;
-}
-
-.cont-modal {   width: 320px;
-                padding-bottom: 1em;
-                border: white solid 1px;
-                border-radius: 20px;
-                text-align: center;
-}
-
-.cont-modal > img {     border-top-left-radius: 20px;
-                        border-top-right-radius: 20px;
-}
-
-.cont-modal > h3 {  color: white;
-                    font-size: 2em;
-}
-
-.cont-modal > p {   color: white;
-                    font-size: 1.2em; 
-                    margin-left: 1em;
-}
-
-.cont-modal > .precio { text-align: right;
-                        font-size: 1.5em;
-                        margin-right: .5em;
-}
-
-.cont-modal > .butt {   margin: auto;
-                        align-cards: center;
-                        justify-content: center;
-}
-
-/*
----------------------------------------------------------------------------------------------------------------------
-    -    -    -    -    -    -    -    -    -    -Contacto-    -    -    -    -    -    -    -    -    -    -    -
----------------------------------------------------------------------------------------------------------------------
-*/
-.contacto {     border: solid gray 1px;
-                border-radius: 5px;
-                padding: 1em;
-}
 /*
 ---------------------------------------------------------------------------------------------------------------------
     -    -    -    -    -    -    -    -    -    -Adm-Productos-    -    -    -    -    -    -    -    -    -    -    -
@@ -376,7 +264,7 @@ footer div p {      text-align: center;
 ---------------------------------------------------------------------------------------------------------------------
 */
     .card_ampliado {
-                    max-width: 500px;
+                    max-width: 320px;
                     border-top-left-radius:20px ;
                     border-top-right-radius:20px ;
     }
@@ -407,7 +295,7 @@ footer div p {      text-align: center;
     }
 
     .card_ampliado img {
-        max-width: 400px; /* achica las imagenes a 400px */
+        max-width: 400px;
         border-top-left-radius: 20px;
         border-bottom-left-radius: 20px;
     }

@@ -1,0 +1,13 @@
+Alumno: Franco Kurachi Ubé.
+
+Año de Cursada: 2020.
+
+Cuatrimestre: Segundo.
+
+Comisión:
+
+Turno: Tarde.
+
+Materia: Programacion 2.
+
+Profecsor: Federico Noto.
