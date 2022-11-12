@@ -177,7 +177,7 @@ const pintarCards = aVelas => {
     cards.addEventListener('click', e => { addAmpliar(e) })
 }
 
- addAmpliar = e => {
+const addAmpliar = e => {
     if (e.target.classList.contains('btn-outline-dark')) {
         setAmpliar(e.target.parentElement)
         console.log(e.target.parentElement)
@@ -640,7 +640,7 @@ const CheckoutDato = () => {
             
             
             MetodoPago()
-            //CheckoutConfirm()
+            CheckoutConfirm()
             //CheckoutSub()
         //}
     })
@@ -683,9 +683,7 @@ const MetodoPago = () => {
         divEfect.appendChild(efectInp)
 
         efectInp.addEventListener('click', e => { 
-            console.log(divEfect)
             Efectivo()
-            
         })
 
     let divTarj = d.createElement('div')
@@ -721,6 +719,7 @@ const MetodoPago = () => {
             cancelar.addEventListener('click', e => { 
                 CheckoutDato()
             })
+            
 }
 
 const Efectivo = () => {
@@ -745,16 +744,14 @@ let siguiente = d.createElement('button')
     siguiente.innerHTML = 'Siguiente'
     divBtn.appendChild(siguiente)
 
-    siguiente.addEventListener('click', e => { 
+    siguiente.addEventListener('click', () => { 
         pago = {
         tarjeta: 'Efectivo',
     }
     localStorage.setItem('pago', JSON.stringify(pago))
-
-    //CheckoutConfirm()
-    CheckoutSub()
+    //CheckoutSub()
+    CheckoutConfirm()
     })
- 
 }
 
 const Tarjeta = () => {
@@ -906,8 +903,8 @@ let cuotasSelec = d.createElement('select')
     localStorage.setItem('pago', JSON.stringify(pago))
 
     
-    //CheckoutConfirm()
-    CheckoutSub()
+    CheckoutConfirm()
+    //CheckoutSub()
     //}
     })
 
@@ -924,15 +921,15 @@ const CheckoutConfirm = () => {
         h2.className = 'h4 ps-3'
         divConfirm.appendChild(h2)
 
-    let divConfir = d.createElement('div')
-        divConfir.className = 'checkout container mt-4 mb-4'
-        divConfirm.appendChild(divConfir)
+    let div = d.createElement('div')
+        div.className = 'checkout container mt-4 mb-4'
+        divConfirm.appendChild(div)
 
         Object.values(carrito).forEach(producto => {
             
             let ul = d.createElement('ul')
             ul.className = 'row text-center ps-1 border-white align-items-center'
-            divConfir.appendChild(ul)
+            div.appendChild(ul)
 
             let liI = d.createElement('li')
             liI.className = 'd-inline col-3 mx-auto pb-1'
@@ -1004,7 +1001,8 @@ const CheckoutConfirm = () => {
         let divBtn = d.createElement('div')
             divBtn.className = 'text-end'
             divFoot.appendChild(divBtn)
-        
+            
+CheckoutSub()
 }
 
 const CheckoutSub = () => {
