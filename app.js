@@ -4,9 +4,8 @@ const section = d.getElementById('section')
 const home = d.getElementById('home')
 const contacto = d.getElementById('contacto')
 
-home.style.display = 'none'
 contacto.style.display = 'none'
-//section.style.display = 'none'
+section.style.display = 'none'
 
 const btnHome = d.getElementById('homeVer')
 const btnProductos = d.getElementById('productoVer')
@@ -113,7 +112,6 @@ const sectionHome = () => {
     home.style.display = 'block'
     section.style.display = 'none'
     contacto.style.display = 'none'
-
 }
 
 const sectionProductos = () => {
@@ -131,7 +129,6 @@ const sectionProductos = () => {
 const pintarCards = aVelas => {
     let cards = d.getElementById('cards')
     aVelas.forEach(producto => {
-        //console.log(producto)
         let article = d.createElement('article');
             article.className = 'cards shadow-lg'
             cards.appendChild(article)
@@ -191,7 +188,6 @@ const setAmpliar = objeto => {
     }
     let id = producto.id
     pintarAmpliar(id)
-
 }
 
 const pintarAmpliar = id => {
@@ -257,149 +253,139 @@ const setCarrito = objeto => {
         producto.cantidad = carrito[producto.id].cantidad + 1
     }
     carrito[producto.id] = {...producto}
-    //console.log(producto)
     pintarMinicarrito()
 }
 
 const sectionCarrito = () => {
+
     section.innerHTML = ''
     let div = d.createElement('div')
-    div.className = 'container'
-    section.appendChild(div)
+        div.className = 'container'
+        section.appendChild(div)
+
         let h1 = d.createElement('h1')
-        h1.innerHTML = 'Carrito de Compras'
-        h1.className = 'h1 mt-4'
-        div.appendChild(h1)
+            h1.innerHTML = 'Carrito de Compras'
+            h1.className = 'h1 mt-4'
+            div.appendChild(h1)
 
         let table = d.createElement('table')
-        table.className = 'table text-center'
-        div.appendChild(table)
+            table.className = 'table text-center'
+            div.appendChild(table)
 
             let thead = d.createElement('thead')
-            thead.className = 'bg-dark text-light'
-            table.appendChild(thead)
+                thead.className = 'bg-dark text-light'
+                table.appendChild(thead)
 
                     let tr = d.createElement('tr')
                     thead.appendChild(tr)
 
-                        let obj = {a: "Id", b: "Imagen", c: "Nombre", d: "Descripcion", e: "Cantidad", f:"Btn", g:"Total"};
-                        for (const prop in obj) {
-                        th = d.createElement('th')
-                        th.innerHTML = `${obj[prop]}`
-                        tr.appendChild(th)
-                        }
+                    let obj = {a: "Id", b: "Imagen", c: "Nombre", d: "Descripcion", e: "Cantidad", f:"Btn", g:"Total"};
+                    for (const prop in obj) {
+                    th = d.createElement('th')
+                    th.innerHTML = `${obj[prop]}`
+                    tr.appendChild(th)
+                    }
 
             let tbody = d.createElement('tbody')
-            tbody.id= 'items'
-            table.appendChild(tbody)
+                tbody.id= 'items'
+                table.appendChild(tbody)
 
             let tfoot = d.createElement('tfoot')
-            tfoot.className = 'borde-BF'
-            table.appendChild(tfoot)
+                tfoot.className = 'borde-BF'
+                table.appendChild(tfoot)
 
                 let tr2 = d.createElement('tr')
-                tr2.id = 'footer'
-                tfoot.appendChild(tr2)
+                    tr2.id = 'footer'
+                    tfoot.appendChild(tr2)
 
         let div2 = d.createElement('div')
-        div2.className = 'text-end pe-2'
-        div.appendChild(div2)
+            div2.className = 'text-end pe-2'
+            div.appendChild(div2)
 
             let btnCompra = d.createElement('button')
-            btnCompra.innerHTML = 'Aceptar'
-            btnCompra.className =  'btn btn-success'
-            div2.appendChild(btnCompra)
+                btnCompra.innerHTML = 'Aceptar'
+                btnCompra.className =  'btn btn-success'
+                div2.appendChild(btnCompra)
 
         btnCompra.addEventListener('click', e => { Checkout(e) })
 
-        
+    items.addEventListener('click', e => { 
+        btnAumentarDisminuir(e) 
+        pintarFooter()
+    })
 pintarCarrito()
 pintarFooter()
 }
 const pintarCarrito = () => {
     let items = d.getElementById('items')
-    //console.log(items)
-    items.innerHTML = ''
+        items.innerHTML = ''
    Object.values(carrito).forEach(producto => {
         
         let tr = d.createElement('tr')
-        tr.className = 'border align-middle'
-        items.appendChild(tr)
+            tr.className = 'border align-middle'
+            items.appendChild(tr)
 
-       let thId = d.createElement('td')
-       thId.innerHTML = producto.id
-       tr.appendChild(thId)
+        let thId = d.createElement('td')
+            thId.innerHTML = producto.id
+            tr.appendChild(thId)
 
-       let thImg = d.createElement('td')
-       tr.appendChild(thImg)
+        let thImg = d.createElement('td')
+            tr.appendChild(thImg)
 
-       let Img = d.createElement('img')
-       Img.src = aVelas[producto.id].imagen
-       Img.alt = 'vela en envase de vidrio'
-       Img.className = 'table-img'
-       thImg.appendChild(Img)
+        let Img = d.createElement('img')
+            Img.src = aVelas[producto.id].imagen
+            Img.alt = 'vela en envase de vidrio'
+            Img.className = 'table-img'
+            thImg.appendChild(Img)
        
-       let tdNombre = d.createElement('td')
-       tdNombre.innerHTML = aVelas[producto.id].nombre
-       tr.appendChild(tdNombre)
+        let tdNombre = d.createElement('td')
+            tdNombre.innerHTML = aVelas[producto.id].nombre
+            tr.appendChild(tdNombre)
 
-       let tdDescaripcion = d.createElement('td')
-       tdDescaripcion.innerHTML = aVelas[producto.id].descripcion
-       tr.appendChild(tdDescaripcion)
+        let tdDescaripcion = d.createElement('td')
+            tdDescaripcion.innerHTML = aVelas[producto.id].descripcion
+            tr.appendChild(tdDescaripcion)
 
-       let tdCantidad = d.createElement('td')
-       tdCantidad.innerHTML = producto.cantidad
-       tr.appendChild(tdCantidad)
+        let tdCantidad = d.createElement('td')
+            tdCantidad.innerHTML = producto.cantidad
+            tr.appendChild(tdCantidad)
 
-       //botones
-       let tdBtn = d.createElement('td')
-       tr.appendChild(tdBtn)
+        let tdBtn = d.createElement('td')
+            tr.appendChild(tdBtn)
 
-       let BtnPrimary = d.createElement('button')
-       BtnPrimary.innerHTML = '+'
-       BtnPrimary.className = 'btn btn-info btn-sm'
-       BtnPrimary.dataset.id = producto.id
-       tdBtn.appendChild(BtnPrimary)
+        let BtnPrimary = d.createElement('button')
+            BtnPrimary.innerHTML = '+'
+            BtnPrimary.className = 'btn btn-info btn-sm'
+            BtnPrimary.dataset.id = producto.id
+            tdBtn.appendChild(BtnPrimary)
 
-       let BtnDanger = d.createElement('button')
-       BtnDanger.innerHTML = '-'
-       BtnDanger.className = 'btn btn-danger btn-sm'
-       BtnDanger.dataset.id = producto.id
-       tdBtn.appendChild(BtnDanger)
+        let BtnDanger = d.createElement('button')
+            BtnDanger.innerHTML = '-'
+            BtnDanger.className = 'btn btn-danger btn-sm'
+            BtnDanger.dataset.id = producto.id
+            tdBtn.appendChild(BtnDanger)
 
-       let thTotal = d.createElement('td')
-       thTotal.innerHTML = producto.cantidad * aVelas[producto.id].precio
-       tr.appendChild(thTotal)
+        let thTotal = d.createElement('td')
+            thTotal.innerHTML = producto.cantidad * aVelas[producto.id].precio
+            tr.appendChild(thTotal)
    })
-   items.addEventListener('click', e => { btnAumentarDisminuir(e) })
-   //pintarFooter()
    pintarMinicarrito()
-   //btnaceptar()
-
    localStorage.setItem('carrito', JSON.stringify(carrito))
-   //console.log(carrito)
 }
 
 const btnAumentarDisminuir = e => {
-    //console.log(e.target)
     if(e.target.classList.contains('btn-info')) {
-        carrito[e.target.dataset.id]
-        //console.log(carrito[e.target.dataset.id])
         const producto = carrito[e.target.dataset.id]
-        producto.cantidad = carrito[e.target.dataset.id].cantidad + 1
-        carrito[e.target.dataset.id] = {...producto}
+        producto.cantidad++
+        carrito[e.target.dataset.id] = { ...producto }
         pintarCarrito()
     }
-// no funciona el restar
     if(e.target.classList.contains('btn-danger')) {
-        carrito[e.target.dataset.id]
-        console.log(carrito[e.target.dataset.id])
         const producto = carrito[e.target.dataset.id]
         producto.cantidad--
         if(producto.cantidad === 0) {
             delete carrito[e.target.dataset.id]
         }
-        //console.log(producto.cantidad)
         pintarCarrito()
     }
     e.stopPropagation()
@@ -407,7 +393,7 @@ const btnAumentarDisminuir = e => {
 
 const pintarFooter = () => {
     let footer = d.getElementById('footer')
-    footer.innerHTML = ''
+        footer.innerHTML = ''
     if(Object.keys(carrito).length === 0) {
         footer.innerHTML = `<th>Carrito Vacio</th>`
         return
@@ -416,37 +402,37 @@ const pintarFooter = () => {
     const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad * precio, 0)
 
     let tdProductos = d.createElement('td')
-    tdProductos.className = 'h5 mx-auto'
-    tdProductos.innerHTML = 'Total Productos'
-    footer.appendChild(tdProductos)
+        tdProductos.className = 'h5 mx-auto'
+        tdProductos.innerHTML = 'Total Productos'
+        footer.appendChild(tdProductos)
 
     let td1 = d.createElement('td')
-    footer.appendChild(td1)
+        footer.appendChild(td1)
     let td2 = d.createElement('td')
-    footer.appendChild(td2)
+        footer.appendChild(td2)
     let td3 = d.createElement('td')
-    footer.appendChild(td3)
+        footer.appendChild(td3)
 
     let tdCantidad = d.createElement('td')
-    tdCantidad.innerHTML = nCantidad
-    footer.appendChild(tdCantidad)
+        tdCantidad.innerHTML = nCantidad
+        footer.appendChild(tdCantidad)
 
     let tdVaciar = d.createElement('td')
-    footer.appendChild(tdVaciar)
+        footer.appendChild(tdVaciar)
 
     let btnVaciar = d.createElement('button')
-    btnVaciar.innerHTML = 'Vaciar'
-    btnVaciar.className = 'btn btn-succes btn-sm'
-    tdVaciar.appendChild(btnVaciar)
-    btnVaciar.addEventListener('click', () => {
-        carrito = {}
-        pintarCarrito()
-        pintarFooter()
-    })
+        btnVaciar.innerHTML = 'Vaciar'
+        btnVaciar.className = 'btn btn-danger btn-sm'
+        tdVaciar.appendChild(btnVaciar)
+        btnVaciar.addEventListener('click', () => {
+            carrito = {}
+            pintarCarrito()
+            pintarFooter()
+        })
 
     let tdTotal = d.createElement('td')
-    tdTotal.innerHTML = nPrecio
-    footer.appendChild(tdTotal)
+        tdTotal.innerHTML = nPrecio
+        footer.appendChild(tdTotal)
 }
 
 const pintarMinicarrito = () => {
@@ -454,71 +440,68 @@ const pintarMinicarrito = () => {
     const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad * precio, 0)
 
     let minicarrito = d.getElementById('minicarrito')
-    minicarrito.querySelectorAll('span')[0].textContent = nCantidad
-    minicarrito.querySelectorAll('span')[1].textContent = "$" + nPrecio
+        minicarrito.querySelectorAll('span')[0].textContent = nCantidad
+        minicarrito.querySelectorAll('span')[1].textContent = "$" + nPrecio
 
 }
 
 const Checkout = () => {
+
     section.innerHTML = ''
-    //checkout.innerHTML = ''
     let div = d.createElement('div')
-    div.className = 'row contacto border'
-    section.appendChild(div)
+        div.className = 'row contacto border'
+        section.appendChild(div)
 
     let div2 = d.createElement('div')
-    div2.className = 'col-md-12 col-lg-6 mx-auto pt-2 border  pb-3'
-    div.appendChild(div2)
+        div2.className = 'col-md-12 col-lg-6 mx-auto pt-2 border  pb-3'
+        div.appendChild(div2)
     
     let span = d.createElement('span')
-    span.className = 'text-secondary d-flex flex-row-reverse'
-    //span.innerHTML = '1 de 2'
-    div2.appendChild(span)
+        span.className = 'text-secondary d-flex flex-row-reverse'
+        div2.appendChild(span)
 
     let form = d.createElement('form')
-    form.id = 'form'
-    //form.action = true
-    //form.method = 'POST'
-    div2.appendChild(form)
+        form.id = 'form'
+        form.action = true
+        form.method = 'POST'
+        div2.appendChild(form)
 
     let divConfirm = d.createElement('div')
         divConfirm.id = 'confirmar'
         divConfirm.className = 'col-md-12 col-lg-5 bg-gris pt-4  ps-0 '
         div.appendChild(divConfirm)
 
-    CheckoutDato()
-    CheckoutConfirm()
-    
+CheckoutDato()
+CheckoutConfirm()
 }
 
 const CheckoutDato = () => {
     
     let form = d.getElementById('form')
-    form.innerHTML = ''
+        form.innerHTML = ''
 
     let span = form.parentElement.firstChild
-    span.innerHTML = '1 de 2'
+        span.innerHTML = '1 de 2'
 
     let div2 = d.createElement('div')
-    div2.className = 'pt-2'
-    form.appendChild(div2)
+        div2.className = 'pt-2'
+        form.appendChild(div2)
 
     let h2 = d.createElement('h2')
-    h2.innerHTML = 'Datos Personales'
-    h2.className = 'h4 border-bottom border-dark'
-    div2.appendChild(h2)
+        h2.innerHTML = 'Datos Personales'
+        h2.className = 'h4 border-bottom border-dark'
+        div2.appendChild(h2)
 
     let nombre = d.createElement('label')
         nombre.innerHTML = 'Nombre'
         nombre.className = 'mt-3 form-label'
-        //for
         div2.appendChild(nombre)
     let nombreInp = d.createElement('input')
         nombreInp.className = ' form-control'
         nombreInp.id = 'nombre'
         nombreInp.type = 'text'
         nombreInp.placeholder = 'Ingrese su Nombre.'
-        //nombreInp.required = true
+        nombreInp.required = true
         div2.appendChild(nombreInp)
     let errNombre = d.createElement('span')
         errNombre.innerHTML = 'El nombre es obligatorio'
@@ -529,14 +512,13 @@ const CheckoutDato = () => {
     let email = d.createElement('label')
         email.innerHTML = 'Email'
         email.className = 'mt-3 form-label'
-        // for
         div2.appendChild(email)
     let emailInp= d.createElement('input')
         emailInp.className = 'form-control'
         emailInp.id = 'email' 
         emailInp.type = 'text'
         emailInp.placeholder = 'Ingrese su Email.'
-        //emailInp.required = true
+        emailInp.required = true
         div2.appendChild(emailInp)
     let errEmail = d.createElement('span')
         errEmail.innerHTML = 'El Email es obligatorio'
@@ -553,7 +535,7 @@ const CheckoutDato = () => {
         telefonoInp.id = 'telefono'
         telefonoInp.type = 'text'
         telefonoInp.placeholder = 'Ingrese su numero de Telefono.'
-        //telefonoInp.required = true
+        telefonoInp.required = true
         div2.appendChild(telefonoInp)
     let errTel = d.createElement('span')
         errTel.innerHTML = 'El Telefono es obligatorio'
@@ -575,7 +557,7 @@ const CheckoutDato = () => {
         direccionInp.id = 'direccion'
         direccionInp.type = 'text'
         direccionInp.placeholder = 'Ingrese su Direccion.'
-        //direccionInp.required = true
+        direccionInp.required = true
         div2.appendChild(direccionInp)
     let errDirecc = d.createElement('span')
         errDirecc.innerHTML = 'La direccion es obligatorio'
@@ -591,7 +573,7 @@ const CheckoutDato = () => {
         fechaInp.className = 'form-control'
         fechaInp.id = 'fecha'
         fechaInp.type = 'date'
-        //fechaInp.required = true
+        fechaInp.required = true
         div2.appendChild(fechaInp)
     let errFecha = d.createElement('span')
         errFecha.innerHTML = 'La Fecha es obligatoria'
@@ -615,7 +597,7 @@ const CheckoutDato = () => {
         divBtn.appendChild(button)
 
     button.addEventListener('click', e => { 
-        /* if (nombreInp.value.length == 0 ){
+        if (nombreInp.value.length == 0 ){
                 errNombre.style.display = 'block'
                 nombreInp.className ='form-control border-danger'
         }if (emailInp.value.length == 0 ){
@@ -630,25 +612,20 @@ const CheckoutDato = () => {
         }if (fechaInp.value.length == 0 ){
             errFecha.style.display = 'block'
             fechaInp.className ='form-control border-danger'        }
-        else { */
+        else {
             dato = {
                 direccion: direccionInp.value,
                 fecha: fechaInp.value,
             }
-            //console.log(dato)
             localStorage.setItem('dato', JSON.stringify(dato))
-            
-            
             MetodoPago()
             CheckoutConfirm()
-            //CheckoutSub()
-        //}
+        }
     })
 }
 
 const MetodoPago = () => {
 
-    //let form = d.getElementById('form')
     form.innerHTML = ''
 
     let span = form.parentElement.firstChild
@@ -749,8 +726,8 @@ let siguiente = d.createElement('button')
         tarjeta: 'Efectivo',
     }
     localStorage.setItem('pago', JSON.stringify(pago))
-    //CheckoutSub()
     CheckoutConfirm()
+    MetodoPago()
     })
 }
 
@@ -770,9 +747,9 @@ let documento = d.createElement('label')
 let dniInp = d.createElement('input')
     dniInp.className = 'form-control'
     dniInp.id = 'dni'
-    dniInp.type = 'num' //checkear este campo
+    dniInp.type = 'number'
     dniInp.placeholder = 'Ingrese su DNI.'
-    //dniInp.required = true
+    dniInp.required = true
     divDni.appendChild(dniInp)
 let errDni = d.createElement('span')
     errDni.innerHTML = 'El DNI es obligatorio'
@@ -790,9 +767,9 @@ let tarjeta = d.createElement('label')
 let tarjetaInp = d.createElement('input')
     tarjetaInp.className = 'form-control'
     tarjetaInp.id = 'tarjeta'
-    tarjetaInp.type = 'num' // revisar este cararcter
+    tarjetaInp.type = 'number'
     tarjetaInp.placeholder = 'Ej: xxxx xxxx xxxx xxxx'
-    //tarjetaInp.required = true
+    tarjetaInp.required = true
     divNumTarj.appendChild(tarjetaInp)
 let errtarj = d.createElement('span')
     errtarj.innerHTML = 'El numero de la tarjeta es obligatorio'
@@ -808,11 +785,12 @@ let seguridad = d.createElement('label')
     seguridad.className = 'mt-3 form-label'
     divseguri.appendChild(seguridad)
 let seguriInp = d.createElement('input')
+    seguriInp.type = 'number'
     seguriInp.className = 'form-control'
     seguriInp.id = 'seguridad'
-    seguriInp.type = 'num' //checkear este campo
+    
     seguriInp.placeholder = 'Ej: 349'
-    //seguriInp.required = true
+    seguriInp.required = true
     divseguri.appendChild(seguriInp)
 let errSegu = d.createElement('span')
     errSegu.innerHTML = 'El codigo de seguridad es obligatorio'
@@ -830,8 +808,8 @@ let vencimiento = d.createElement('label')
 let vencInp = d.createElement('input')
     vencInp.className = 'form-control'
     vencInp.id = 'vencimiento'
-    vencInp.type = 'date' //checkear este campo
-    //vencInp.required = true
+    vencInp.type = 'date'
+    vencInp.required = true
     divVenc.appendChild(vencInp)
 let errVenc = d.createElement('span')
     errVenc.innerHTML = 'El Vencimiento de la tarjeta es obligatorio'
@@ -849,8 +827,7 @@ let cuotas = d.createElement('label')
 let cuotasSelec = d.createElement('select')
     cuotasSelec.className = 'form-select'
     cuotasSelec.id = 'cuotas'
-    cuotasSelec.type = 'num' //checkear este campo
-    //cuotasSelec.required = true
+    cuotasSelec.required = true
     divCuotas.appendChild(cuotasSelec)    
     for (i=1; i<7; i++){
         let cuota = i
@@ -860,8 +837,8 @@ let cuotasSelec = d.createElement('select')
             cuota +=' Cuotas'
         }
         let options = d.createElement('option')
-        options.innerHTML = cuota
-        cuotasSelec.appendChild(options)
+            options.innerHTML = cuota
+            cuotasSelec.appendChild(options)
     }
 
     let divBtn = div.lastChild
@@ -881,8 +858,8 @@ let cuotasSelec = d.createElement('select')
         siguiente.innerHTML = 'Siguiente'
         divBtn.appendChild(siguiente)
    
-    siguiente.addEventListener('click', e => { 
-    /* if (dniInp.value.length == 0 ){
+    siguiente.addEventListener('click', () => { 
+    if (dniInp.value.length == 0 ){
             errDni.style.display = 'block'
             dniInp.className ='form-control border-danger'
     }if (tarjetaInp.value.length == 0 ){
@@ -894,18 +871,14 @@ let cuotasSelec = d.createElement('select')
     }if (vencInp.value.length == 0 ){
         errVenc.style.display = 'block'
         vencInp.className ='form-control border-danger'
-    } else { */
+    } else {
         pago = {
         tarjeta: tarjetaInp.value,
-        //fecha: inputTarj.value
     }
-    //console.log(pago)
     localStorage.setItem('pago', JSON.stringify(pago))
-
-    
     CheckoutConfirm()
-    //CheckoutSub()
-    //}
+    MetodoPago()
+    }
     })
 
 }
@@ -913,7 +886,6 @@ let cuotasSelec = d.createElement('select')
 const CheckoutConfirm = () => {  
 
     let divConfirm = d.getElementById('confirmar')
-        console.log(divConfirm)
         divConfirm.innerHTML = ''
 
     let h2 = d.createElement('h2')
@@ -928,33 +900,33 @@ const CheckoutConfirm = () => {
         Object.values(carrito).forEach(producto => {
             
             let ul = d.createElement('ul')
-            ul.className = 'row text-center ps-1 border-white align-items-center'
-            div.appendChild(ul)
+                ul.className = 'row text-center ps-1 border-white align-items-center'
+                div.appendChild(ul)
 
             let liI = d.createElement('li')
-            liI.className = 'd-inline col-3 mx-auto pb-1'
-            ul.appendChild(liI)
+                liI.className = 'd-inline col-3 mx-auto pb-1'
+                ul.appendChild(liI)
 
                 let img = d.createElement('img')
-                img.src = aVelas[producto.id].imagen
-                img.alt = 'vela en envase de vidrio'
-                img.style.setProperty("max-width", "50px")
-                liI.appendChild(img)
+                    img.src = aVelas[producto.id].imagen
+                    img.alt = 'vela en envase de vidrio'
+                    img.style.setProperty("max-width", "50px")
+                    liI.appendChild(img)
 
             let liN = d.createElement('li')
-            liN.innerHTML = aVelas[producto.id].nombre
-            liN.className = 'd-inline col-3  mx-auto pb-1'
-            ul.appendChild(liN)
+                liN.innerHTML = aVelas[producto.id].nombre
+                liN.className = 'd-inline col-3  mx-auto pb-1'
+                ul.appendChild(liN)
 
             let liC = d.createElement('li')
-            liC.innerHTML =producto.cantidad
-            liC.className = 'd-inline col-3  mx-auto pb-1'
-            ul.appendChild(liC)
+                liC.innerHTML =producto.cantidad
+                liC.className = 'd-inline col-3  mx-auto pb-1'
+                ul.appendChild(liC)
             
             let liT = d.createElement('li') 
-            liT.innerHTML = producto.cantidad * aVelas[producto.id].precio
-            liT.className = 'd-inline col-3  mx-auto pb-1'
-            ul.appendChild(liT)
+                liT.innerHTML = producto.cantidad * aVelas[producto.id].precio
+                liT.className = 'd-inline col-3  mx-auto pb-1'
+                ul.appendChild(liT)
         })
 
         const nPrecio = Object.values(carrito).reduce((acc, {cantidad, precio}) => acc + cantidad * precio, 0)
@@ -1015,7 +987,7 @@ const CheckoutSub = () => {
         dato = JSON.parse(localStorage.getItem('dato'))
         
         let direc = d.createElement('li')
-            direc.innerHTML= 'Direccion'
+            direc.innerHTML= 'Direccion:'
             direc.className = 'd-inline col-6 h6 text-secondary pb-1'
             ul.insertBefore(direc, subtotal)
         let direcDato = d.createElement('li')
@@ -1024,7 +996,7 @@ const CheckoutSub = () => {
             ul.insertBefore(direcDato, subtotal)
 
         let entrega = d.createElement('li')
-            entrega.innerHTML= 'Fecha de entrega'
+            entrega.innerHTML= 'Fecha de entrega:'
             entrega.className = 'd-inline col-6 h6 text-secondary pb-1'
             ul.insertBefore(entrega, subtotal)
         let entregaDato = d.createElement('li')
@@ -1034,17 +1006,31 @@ const CheckoutSub = () => {
     }
 
     if(localStorage.getItem('pago') ){
-        pago = JSON.parse(localStorage.getItem('pago'))
 
-        let metodo = d.createElement('li')
-            metodo.innerHTML= 'Metodo de pago:'
-            metodo.className = 'd-inline col-6 h6 text-secondary pb-1'
-            ul.insertBefore(metodo, subtotal)
+        pago = JSON.parse(localStorage.getItem('pago'))    
+            if(pago.tarjeta == 'Efectivo'){
+                //console.log('Es efectivo')
+                let metodo = d.createElement('li')
+                metodo.innerHTML= 'Metodo de pago:'
+                metodo.className = 'd-inline col-6 h6 text-secondary pb-1'
+                ul.insertBefore(metodo, subtotal)
+                    
+                let pagoDato = d.createElement('li')
+                    pagoDato.innerHTML = pago.tarjeta
+                    pagoDato.className = 'd-inline col-6 text-end text-secondary pb-1'
+                    ul.insertBefore(pagoDato, subtotal)
+            } else {
+                let metodo = d.createElement('li')
+                    metodo.innerHTML= 'Tarjeta terminada en:'
+                    metodo.className = 'd-inline col-6 h6 text-secondary pb-1'
+                    ul.insertBefore(metodo, subtotal)
 
-        let pagoDato = d.createElement('li')
-            pagoDato.innerHTML = pago.tarjeta
-            pagoDato.className = 'd-inline col-6 text-end text-secondary pb-1'
-            ul.insertBefore(pagoDato, subtotal)
+                let tarjeta = pago.tarjeta
+                let pagoDato = d.createElement('li')
+                    pagoDato.innerHTML = tarjeta.substring(tarjeta.length - 4)
+                    pagoDato.className = 'd-inline col-6 text-end text-secondary pb-1'
+                    ul.insertBefore(pagoDato, subtotal)
+            }
 
         let cancelar = d.createElement('button')
             cancelar.className = 'btn btn-danger'
@@ -1054,7 +1040,7 @@ const CheckoutSub = () => {
                 sectionProductos()
             })
 
-            let aceptar = d.createElement('button')
+        let aceptar = d.createElement('button')
             aceptar.className = 'btn btn-success'
             aceptar.innerHTML = 'Aceptar'
             divBtn.appendChild(aceptar)
@@ -1075,11 +1061,10 @@ let div = d.createElement('div')
     section.appendChild(div)
 
     let img = d.createElement('img')
-    img.src = 'img/icons/cheque.png'
-    img.alt = 'Checkout'
-    img.className = 'p-2'
-    div.appendChild(img)
-    // Alt
+        img.src = 'img/icons/cheque.png'
+        img.alt = 'Checkout'
+        img.className = 'p-2'
+        div.appendChild(img)
 
 let h2 = d.createElement('h2')
     h2.innerHTML = '¡Todo Listo!'
@@ -1105,7 +1090,5 @@ let btnSeguir = d.createElement('button')
     btnSeguir.addEventListener('click', e => { 
         sectionProductos()
     })
-
-
 }
 
